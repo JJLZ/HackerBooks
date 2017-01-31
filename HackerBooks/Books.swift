@@ -14,7 +14,7 @@ class Book {
     // MARK: Stored Properties
     let title: String
     let authors: [String]
-    let tags: [String]
+    let tags: [Tag]
     let imageUrl: URL
     let pdfUrl: URL
     
@@ -22,12 +22,22 @@ class Book {
     
     // MARK: Initialization
     
-    init(title: String, authors: [String], tags: [String], imageUrl: URL, pdfUrl: URL) {
+    init(title: String, authors: [String], tags: [Tag], imageUrl: URL, pdfUrl: URL) {
         
         self.title = title;
         self.authors = authors;
         self.tags = tags;
         self.imageUrl = imageUrl;
         self.pdfUrl = pdfUrl;
+    }
+}
+
+extension Book: CustomStringConvertible {
+    
+    public var description: String {
+        
+        get {
+            return "<\(type(of:self)): \(title)>"
+        }
     }
 }

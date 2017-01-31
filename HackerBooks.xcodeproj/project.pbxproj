@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		88228FDC1E412CB700450F39 /* AsyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88228FDB1E412CB700450F39 /* AsyncData.swift */; };
-		88228FDE1E412CD600450F39 /* Multidictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88228FDD1E412CD600450F39 /* Multidictionary.swift */; };
 		88228FE41E41490C00450F39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88228FE31E41490C00450F39 /* Main.storyboard */; };
 		88228FEB1E414B9C00450F39 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88228FE91E414B9C00450F39 /* LibraryViewController.swift */; };
 		88228FEC1E414B9C00450F39 /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88228FEA1E414B9C00450F39 /* LibraryViewController.xib */; };
+		88228FEE1E41564800450F39 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88228FED1E41564800450F39 /* FoundationExtensions.swift */; };
 		882654141E3CB3A4005E8D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882654131E3CB3A4005E8D22 /* AppDelegate.swift */; };
 		8826541B1E3CB3A4005E8D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8826541A1E3CB3A4005E8D22 /* Assets.xcassets */; };
 		8826541E1E3CB3A4005E8D22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8826541C1E3CB3A4005E8D22 /* LaunchScreen.storyboard */; };
@@ -20,14 +19,17 @@
 		8826542E1E3CB8B6005E8D22 /* books_readable.json in Resources */ = {isa = PBXBuildFile; fileRef = 8826542D1E3CB8B6005E8D22 /* books_readable.json */; };
 		882654301E3CFFB9005E8D22 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */; };
 		882654321E3D008F005E8D22 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882654311E3D008F005E8D22 /* Errors.swift */; };
+		88864A1F1E43C1D9003AC5EC /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88864A1E1E43C1D9003AC5EC /* Tags.swift */; };
+		88864A211E43C986003AC5EC /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88864A201E43C986003AC5EC /* Authors.swift */; };
+		88D8F15E1E42BEFE009D0EB8 /* MultiDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D8F15D1E42BEFE009D0EB8 /* MultiDictionary.swift */; };
+		88D8F1601E42BF1E009D0EB8 /* AsyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D8F15F1E42BF1E009D0EB8 /* AsyncData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		88228FDB1E412CB700450F39 /* AsyncData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncData.swift; sourceTree = "<group>"; };
-		88228FDD1E412CD600450F39 /* Multidictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multidictionary.swift; sourceTree = "<group>"; };
 		88228FE31E41490C00450F39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		88228FE91E414B9C00450F39 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		88228FEA1E414B9C00450F39 /* LibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryViewController.xib; sourceTree = "<group>"; };
+		88228FED1E41564800450F39 /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
 		882654101E3CB3A4005E8D22 /* HackerBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		882654131E3CB3A4005E8D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8826541A1E3CB3A4005E8D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +40,10 @@
 		8826542D1E3CB8B6005E8D22 /* books_readable.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = books_readable.json; sourceTree = "<group>"; };
 		8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
 		882654311E3D008F005E8D22 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		88864A1E1E43C1D9003AC5EC /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
+		88864A201E43C986003AC5EC /* Authors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
+		88D8F15D1E42BEFE009D0EB8 /* MultiDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDictionary.swift; sourceTree = "<group>"; };
+		88D8F15F1E42BF1E009D0EB8 /* AsyncData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,7 +60,8 @@
 		88228FDA1E412CA500450F39 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				88228FDB1E412CB700450F39 /* AsyncData.swift */,
+				88D8F15F1E42BF1E009D0EB8 /* AsyncData.swift */,
+				88228FED1E41564800450F39 /* FoundationExtensions.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -90,10 +97,12 @@
 			isa = PBXGroup;
 			children = (
 				882654281E3CB67F005E8D22 /* Books.swift */,
+				88864A1E1E43C1D9003AC5EC /* Tags.swift */,
+				88864A201E43C986003AC5EC /* Authors.swift */,
 				8826542A1E3CB699005E8D22 /* Library.swift */,
 				8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */,
 				882654311E3D008F005E8D22 /* Errors.swift */,
-				88228FDD1E412CD600450F39 /* Multidictionary.swift */,
+				88D8F15D1E42BEFE009D0EB8 /* MultiDictionary.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -206,11 +215,14 @@
 				882654291E3CB67F005E8D22 /* Books.swift in Sources */,
 				8826542B1E3CB699005E8D22 /* Library.swift in Sources */,
 				88228FEB1E414B9C00450F39 /* LibraryViewController.swift in Sources */,
-				88228FDC1E412CB700450F39 /* AsyncData.swift in Sources */,
+				88D8F1601E42BF1E009D0EB8 /* AsyncData.swift in Sources */,
 				882654141E3CB3A4005E8D22 /* AppDelegate.swift in Sources */,
 				882654321E3D008F005E8D22 /* Errors.swift in Sources */,
 				882654301E3CFFB9005E8D22 /* JSONProcessing.swift in Sources */,
-				88228FDE1E412CD600450F39 /* Multidictionary.swift in Sources */,
+				88D8F15E1E42BEFE009D0EB8 /* MultiDictionary.swift in Sources */,
+				88864A1F1E43C1D9003AC5EC /* Tags.swift in Sources */,
+				88864A211E43C986003AC5EC /* Authors.swift in Sources */,
+				88228FEE1E41564800450F39 /* FoundationExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

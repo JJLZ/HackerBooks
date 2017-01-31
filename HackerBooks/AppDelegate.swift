@@ -15,9 +15,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // Download books data
+        do {
+            // Array de diccionarios de JSON
+            let json = try loadFromLocalFile(fileName: "books_readable.json")
+            
+            var books = [Book]()
+            for dict in json {
+                
+                do {
+                    let book = try decode(book: dict)
+                    books.append(book)
+                } catch {
+                    print("Error al procesar \(dict)")
+                }
+            }
+            print("\(books)")
+            
+        } catch {
+            
+            fatalError("Error while loading JSON file")
+        }
+        
         let libraryVC = LibraryViewController(nibName: "LibraryViewController", bundle: nil)
         let navController = UINavigationController(rootViewController: libraryVC)
         
+        window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
         

@@ -14,10 +14,6 @@ typealias TagName = String
 typealias BooksArray = [Book]
 typealias TagsArray = [Tag]
 
-class Tag {
-    var name: String = ""
-}
-
 class Library {
     
     // MARK: Stored Properties
