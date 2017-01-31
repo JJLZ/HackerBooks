@@ -1,45 +1,114 @@
 //
-//  AppDelegate.swift
+//  Multidictionary.swift
 //  HackerBooks
 //
-//  Created by JJLZ on 1/28/17.
+//  Created by JJLZ on 1/31/17.
 //  Copyright © 2017 ESoft. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+// Ejemplo de uso
+//var map = MutiDictionary<String , Int>()
+//
+//var pares = Set<Int>()
+//pares.insert(2)
+//pares.insert(4)
+//
+//map["Pares"] = pares    // setter
+//map["Pares"]            // getter
 
-    var window: UIWindow?
+public
+struct MutiDictionary <Key: Hashable, Value: Hashable> {
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    // MARK: - Types
+    public
+    typealias Bucket = Set<Value>
+    
+    // MARK: Properties
+    private
+    var _dict : [Key : Bucket]
+    
+    // MARK: Lifecycle
+    public
+    init() {
+        _dict = Dictionary()
+    }
+    
+    // MARK: Accessors
+    public
+    var isEmpy: Bool {
+        return _dict.isEmpty
+    }
+    
+    public
+    var countBuckets: Int {
+        return _dict.count
+    }
+    
+    public
+    var count : Int {
         
-        // Override point for customization after application launch.
-        return true
+        var total = 0
+        for bucket in _dict.values {
+            total += bucket.count
+        }
+        return total
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
+    public
+    var countUnique: Int {
+        var total = Bucket()
+        
+        for bucket in _dict.values {
+            total = total.union(bucket)
+        }
+        
+        return total.count
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    // MARK: Setters (Mutators)
+    public
+    subscript(key: Key) -> Bucket? {
+        
+        get {
+            return _dict[key]
+        }
+        
+        set(maybeNewBucket) {
+            guard let newBucket = maybeNewBucket else {
+                // añadir nada es no añadir
+                return
+            }
+            
+            guard let previous = _dict[key] else {
+                // Si no había nada bajo dicha clave
+                // la añadimos con un bucket vacio
+                _dict[key] = Bucket()
+                return
+            }
+            
+            // Creamos una unión de lo viejo y lo nuevo
+            _dict[key] = previous.union(newBucket)
+        }
     }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    // Toda función que cambie el estado (self) de la estructura
+    // tiene que venir precedida por la palabreja mutatin
+    public
+    mutating func insert(value: Value, forKey key: Key) {
+        
+        if var previous = _dict[key] {
+            previous.insert(value)
+            _dict[key] = previous
+        } else {
+            _dict[key] = [value]
+        }
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
+    
+    // Cosas que faltan (ver slack para la versión completa)
+    // eliminar valures
+    // poder iterear por el multiDict como lo hase por un diccionario
 }
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
