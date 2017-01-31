@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		88228FDC1E412CB700450F39 /* AsyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88228FDB1E412CB700450F39 /* AsyncData.swift */; };
 		88228FDE1E412CD600450F39 /* Multidictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88228FDD1E412CD600450F39 /* Multidictionary.swift */; };
+		88228FE41E41490C00450F39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88228FE31E41490C00450F39 /* Main.storyboard */; };
+		88228FEB1E414B9C00450F39 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88228FE91E414B9C00450F39 /* LibraryViewController.swift */; };
+		88228FEC1E414B9C00450F39 /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88228FEA1E414B9C00450F39 /* LibraryViewController.xib */; };
 		882654141E3CB3A4005E8D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882654131E3CB3A4005E8D22 /* AppDelegate.swift */; };
-		882654161E3CB3A4005E8D22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882654151E3CB3A4005E8D22 /* ViewController.swift */; };
 		8826541B1E3CB3A4005E8D22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8826541A1E3CB3A4005E8D22 /* Assets.xcassets */; };
 		8826541E1E3CB3A4005E8D22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8826541C1E3CB3A4005E8D22 /* LaunchScreen.storyboard */; };
 		882654291E3CB67F005E8D22 /* Books.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882654281E3CB67F005E8D22 /* Books.swift */; };
@@ -23,9 +25,11 @@
 /* Begin PBXFileReference section */
 		88228FDB1E412CB700450F39 /* AsyncData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncData.swift; sourceTree = "<group>"; };
 		88228FDD1E412CD600450F39 /* Multidictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Multidictionary.swift; sourceTree = "<group>"; };
+		88228FE31E41490C00450F39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		88228FE91E414B9C00450F39 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
+		88228FEA1E414B9C00450F39 /* LibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryViewController.xib; sourceTree = "<group>"; };
 		882654101E3CB3A4005E8D22 /* HackerBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		882654131E3CB3A4005E8D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		882654151E3CB3A4005E8D22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8826541A1E3CB3A4005E8D22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8826541D1E3CB3A4005E8D22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8826541F1E3CB3A4005E8D22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -97,8 +101,10 @@
 		882654261E3CB5F5005E8D22 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				88228FE31E41490C00450F39 /* Main.storyboard */,
 				882654131E3CB3A4005E8D22 /* AppDelegate.swift */,
-				882654151E3CB3A4005E8D22 /* ViewController.swift */,
+				88228FE91E414B9C00450F39 /* LibraryViewController.swift */,
+				88228FEA1E414B9C00450F39 /* LibraryViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -183,6 +189,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8826542E1E3CB8B6005E8D22 /* books_readable.json in Resources */,
+				88228FEC1E414B9C00450F39 /* LibraryViewController.xib in Resources */,
+				88228FE41E41490C00450F39 /* Main.storyboard in Resources */,
 				8826541E1E3CB3A4005E8D22 /* LaunchScreen.storyboard in Resources */,
 				8826541B1E3CB3A4005E8D22 /* Assets.xcassets in Resources */,
 			);
@@ -197,8 +205,8 @@
 			files = (
 				882654291E3CB67F005E8D22 /* Books.swift in Sources */,
 				8826542B1E3CB699005E8D22 /* Library.swift in Sources */,
+				88228FEB1E414B9C00450F39 /* LibraryViewController.swift in Sources */,
 				88228FDC1E412CB700450F39 /* AsyncData.swift in Sources */,
-				882654161E3CB3A4005E8D22 /* ViewController.swift in Sources */,
 				882654141E3CB3A4005E8D22 /* AppDelegate.swift in Sources */,
 				882654321E3D008F005E8D22 /* Errors.swift in Sources */,
 				882654301E3CFFB9005E8D22 /* JSONProcessing.swift in Sources */,
