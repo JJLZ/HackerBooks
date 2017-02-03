@@ -17,10 +17,9 @@ typealias JSONArray         = [JSONDictionary]
 
 // MARK: - Loading
 
-func loadFromLocalFile(fileName name: String, bundle: Bundle = Bundle.main) throws -> JSONArray {
+func loadJsonFileFrom(localUrl: URL) throws -> JSONArray {
     
-    if let url: URL = bundle.url(forResource: name),
-        let data = try? Data(contentsOf: url),
+    if let data = try? Data(contentsOf: localUrl),
         let maybeArray = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? JSONArray,
         let array = maybeArray {
         

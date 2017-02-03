@@ -17,8 +17,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Download books data
         do {
+            let defaults = UserDefaults.standard
+            
+            // Ruta completa para books.json dentro de nuestra carpeta Documents
+            var jsonFileUrl = FileManager.default.urls(for: .documentDirectory, in:.userDomainMask).first!
+            jsonFileUrl.appendPathComponent("books.json")
+            
+            // Verificamos UserDefaults para ver si el archivo ya ha sido descargado
+            let isLocal = defaults.bool(forKey: "jsonDocumentIsAlreadyDownloaded")
+            
+            if isLocal { // Si el archivo json ya ha sido descargado
+                
+                // Hacemos el parsing del json y cargamos nuestro modelo
+                loadDataFromJsonFile(localUrl: jsonFileUrl)
+                
+            } else { // El json no esta en local
+                
+                // Lo descargamos desde https://t.co/K9ziV0z3SJ y lo guradamos en en la carpeta Documents
+                if let url = URL(string: "https://t.co/K9ziV0z3SJ") {
+                    
+                    Downloader.load(url: url, to: jsonFileUrl, completion: {
+                
+                        // Actualizamos bandera en UserDefaults para no volverlo a descargar
+                        defaults.set(true, forKey: "jsonDocumentIsAlreadyDownloaded")
+                        defaults.synchronize()
+                        
+                        // Hacemos el parsing del json y cargamos nuestro modelo
+                        self.loadDataFromJsonFile(localUrl: jsonFileUrl)
+                    })
+                }
+            }
+        }
+        
+        let libraryVC = LibraryViewController(nibName: "LibraryViewController", bundle: nil)
+        let navController = UINavigationController(rootViewController: libraryVC)
+        
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = navController
+        window?.makeKeyAndVisible()
+        
+        return true
+    }
+    
+    func loadDataFromJsonFile(localUrl: URL) {
+        
+        do {
+            // Pasamos la url a la función encargada de iniciar el parsing
             // Array de diccionarios de JSON
-            let json = try loadFromLocalFile(fileName: "books_readable.json")
+            let json = try loadJsonFileFrom(localUrl: localUrl)
             
             var books = [Book]()
             for dict in json {
@@ -36,17 +82,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             fatalError("Error while loading JSON file")
         }
-        
-        let libraryVC = LibraryViewController(nibName: "LibraryViewController", bundle: nil)
-        let navController = UINavigationController(rootViewController: libraryVC)
-        
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navController
-        window?.makeKeyAndVisible()
-        
-        return true
     }
-
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
