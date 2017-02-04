@@ -19,13 +19,15 @@ class Library {
     // MARK: Stored Properties
     var books: [Book]
     var tags: [Tag]
-    var booksCount: Int {
-        
-        get {
-            let count: Int = self.books.count
-            return count
-        }
-    }
+    var almacen = MultiDictionary<Tag, Book>()
+    
+//    var booksCount: Int {
+//        
+//        get {
+//            let count: Int = self.books.count
+//            return count
+//        }
+//    }
     
     // MARK: Initialization
     init(books: BooksArray) {
@@ -41,50 +43,92 @@ class Library {
         
         // Obtener array de Tag ordenado y sin elementos duplicados
         // para usuarlo como key en el multidictionary
-
         // eliminando duplicados
         let uniqueArray:[Tag] = Array(Set(allTags))
         
         // ordenando los tags en orden alfabetico
         var sortedArray:[Tag] = uniqueArray.sorted(by: {$0.name < $1.name})
         
-        // agregando el tag "Favorito" como primer elemento del array ordenado
+        // agregando el tag "Favorite" como primer elemento del array ordenado
         let tagFavorite = Tag(name: "Favorite")
         sortedArray.insert(tagFavorite, at: 0)
         
         // ya tenemos lo que buscamos
         self.tags = sortedArray
-        print("\(self.tags)")
         
         // Cargar el multidictionary
-        var almacen = MultiDictionary<TagName, Book>()
-        
-        almacen.insert(value: self.books[0], forKey: "Hola")
+        loadDepot(tags: self.tags, books: self.books)
     }
     
-//    // Cantidad de libros que hay un una temática.
-//    // Si el tag no existe, debe de devolver cero.
-//    func bookCount(forTagName name: TagName) -> Int {
+    // Cargamos el multidictionary
+    func loadDepot(tags: [Tag], books: [Book]) {
+        
+        for tag in self.tags {
+            
+            for book in self.books {
+                
+                for bookTag in book.tags {
+                    
+                    if bookTag == tag {
+                        almacen.insert(value: book, forKey: tag)
+                    }
+                }
+            }
+        }
+
+        //--newcode test --//
+//        let tagCont: Int = self.bookCount(forTagName: "algorithms")
+//        print("\(tagCont)")
 //        
-//    }
-//    
-//    // Array de los libros (instancias de Book) que hay en una temática.
-//    // Un libro puede estar en una o más temáticas.
-//    // Si no hay libros para una temática, ha de devolver nil.
-//    func books(forTagName name: TagName) -> [Book]? {
+//        let tabBooks: [Book]? = self.books(forTagName: "algorithms")
+//        print("\(tabBooks)")
 //        
-//        
-//    }
-//    
-//    // Un AGTBook para el libro que está en loa posición 'index'
-//    // de aquellos bajo un cierto tag.
-//    // Mira a ver si puedes usar el método anterior para hacer parte
-//    // de tu trabajo.
-//    // Si el indice no existe o el tag no existe, ha de devolver nil.
-//    func book(forTagName name: TagName, at: Int) -> Book? {
-//        
-//    }
+//        let elemento1: Book? = self.book(forTagName: "algorithms", at: 1)
+//        print("\(elemento1)")
+        
+//        print("keys.count \(almacen.keys.count)")
+//        print("countUnique \(almacen.countUnique)")
+//        print("countBuckets \(almacen.countBuckets)")
+//        print("count \(almacen.count)")
+    }
+    
+    // Cantidad de libros que hay un una temática.
+    // Si el tag no existe, debe de devolver cero.
+    func bookCount(forTagName name: TagName) -> Int {
+    
+        let tag = Tag(name: name)
+        return almacen[tag]?.count ?? 0
+    }
+    
+    // Array de los libros (instancias de Book) que hay en una temática.
+    // Un libro puede estar en una o más temáticas.
+    // Si no hay libros para una temática, ha de devolver nil.
+    func books(forTagName name: TagName) -> [Book]? {
+        
+        let tag = Tag(name: name)
+        
+        if let books = almacen[tag]?.sorted() {
+            return Array(books)
+        } else {
+            return nil
+        }
+    }
+    
+    // Un AGTBook para el libro que está en loa posición 'index'
+    // de aquellos bajo un cierto tag.
+    // Mira a ver si puedes usar el método anterior para hacer parte
+    // de tu trabajo.
+    // Si el indice no existe o el tag no existe, ha de devolver nil.
+    func book(forTagName name: TagName, at: Int) -> Book? {
+        
+        let allBooks: [Book]? = self.books(forTagName: name)
+        
+        return allBooks?[at] ?? nil
+    }
 }
+
+//[<Tag: Favorite>, <Tag: access controls>, <Tag: algorithms>, <Tag: android>, <Tag: artificial intelligence>, <Tag: c>, <Tag: coffeescript>, <Tag: community management>, <Tag: compilers>, <Tag: control theory>, <Tag: cryptography>, <Tag: cs>, <Tag: data mining>, <Tag: data structures>, <Tag: data visualization>, <Tag: databases>, <Tag: design>, <Tag: distributed systems>, <Tag: distributed version control system>, <Tag: dvcs>, <Tag: foss>, <Tag: functional>, <Tag: game theory>, <Tag: git>, <Tag: go>, <Tag: golang>, <Tag: graphics>, <Tag: gtd>, <Tag: haskell>, <Tag: html5>, <Tag: information theory>, <Tag: java>, <Tag: javascript>, <Tag: js>, <Tag: learning algorithms>, <Tag: linear algebra>, <Tag: machine learning>, <Tag: math>, <Tag: matrix computations>, <Tag: mercurial>, <Tag: mongodb>, <Tag: nosql>, <Tag: open source>, <Tag: open source processes>, <Tag: optimization>, <Tag: parsing>, <Tag: php>, <Tag: planning>, <Tag: practical>, <Tag: programing>, <Tag: programming>, <Tag: python>, <Tag: robotics>, <Tag: security>, <Tag: statistics>, <Tag: subversion>, <Tag: text processing>, <Tag: tutorials>, <Tag: veracity>, <Tag: version control>, <Tag: vim>, <Tag: web development>, <Tag: web-design>]
+
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
