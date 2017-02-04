@@ -17,17 +17,35 @@ typealias JSONArray         = [JSONDictionary]
 
 // MARK: - Loading
 
+//func loadJsonFileFrom(localUrl: URL) throws -> JSONArray {
+//    
+//    if let data = try? Data(contentsOf: localUrl),
+//        let maybeArray = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? JSONArray,
+//        let array = maybeArray {
+//        
+//        return array
+//    } else {
+//        throw HackerBooksErrors.jsonParsingError
+//    }
+//}
+
 func loadJsonFileFrom(localUrl: URL) throws -> JSONArray {
     
     if let data = try? Data(contentsOf: localUrl),
         let maybeArray = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? JSONArray,
         let array = maybeArray {
         
+        //--newcode Array o Diccionario --
+        // http://stackoverflow.com/questions/28325268/convert-array-to-json-string-in-swift
+        // http://stackoverflow.com/questions/30480672/how-to-convert-a-json-string-to-a-dictionary
+        //--
+        
         return array
     } else {
         throw HackerBooksErrors.jsonParsingError
     }
 }
+
 
 // MARK: Decoding
 

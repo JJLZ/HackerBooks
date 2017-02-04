@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Tag {
+class Tag: Hashable {
     
     let name: String;
     
@@ -16,6 +16,24 @@ class Tag {
         
         self.name = name
     }
+    
+    //-- Hashable --
+    private var scalarArray: [UInt32] = []
+    
+    // required var for the Hashable protocol
+    var hashValue: Int {
+
+        return self.scalarArray.reduce(5381) {
+            ($0 << 5) &+ $0 &+ Int($1)
+        }
+    }
+}
+
+// MARK: Protocols
+
+//-- Hashable --
+func == (lhs: Tag, rhs: Tag) -> Bool {
+    return lhs.hashValue == rhs.hashValue
 }
 
 extension Tag: CustomStringConvertible {

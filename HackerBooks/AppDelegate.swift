@@ -15,39 +15,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        // Download books data
-        do {
-            let defaults = UserDefaults.standard
+        let defaults = UserDefaults.standard
+        
+        // Ruta completa para books.json dentro de nuestra carpeta Documents
+        var jsonFileUrl = FileManager.default.urls(for: .documentDirectory, in:.userDomainMask).first!
+        jsonFileUrl.appendPathComponent("books.json")
+        
+        var bookArray = [Book]()
+        
+        // Verificamos UserDefaults para ver si el archivo ya ha sido descargado
+        let isLocal = defaults.bool(forKey: "jsonDocumentIsAlreadyDownloaded")
+        
+        if isLocal { // Si el archivo json ya ha sido descargado
             
-            // Ruta completa para books.json dentro de nuestra carpeta Documents
-            var jsonFileUrl = FileManager.default.urls(for: .documentDirectory, in:.userDomainMask).first!
-            jsonFileUrl.appendPathComponent("books.json")
+            // Hacemos el parsing del json y cargamos nuestro modelo
+            bookArray = loadDataFromJsonFile(localUrl: jsonFileUrl)
             
-            // Verificamos UserDefaults para ver si el archivo ya ha sido descargado
-            let isLocal = defaults.bool(forKey: "jsonDocumentIsAlreadyDownloaded")
+        } else { // El json no esta en local
             
-            if isLocal { // Si el archivo json ya ha sido descargado
+            // Lo descargamos desde https://t.co/K9ziV0z3SJ y lo guradamos en en la carpeta Documents
+            if let url = URL(string: "https://t.co/K9ziV0z3SJ") {
                 
-                // Hacemos el parsing del json y cargamos nuestro modelo
-                loadDataFromJsonFile(localUrl: jsonFileUrl)
-                
-            } else { // El json no esta en local
-                
-                // Lo descargamos desde https://t.co/K9ziV0z3SJ y lo guradamos en en la carpeta Documents
-                if let url = URL(string: "https://t.co/K9ziV0z3SJ") {
+                Downloader.load(url: url, to: jsonFileUrl, completion: {
                     
-                    Downloader.load(url: url, to: jsonFileUrl, completion: {
-                
-                        // Actualizamos bandera en UserDefaults para no volverlo a descargar
-                        defaults.set(true, forKey: "jsonDocumentIsAlreadyDownloaded")
-                        defaults.synchronize()
-                        
-                        // Hacemos el parsing del json y cargamos nuestro modelo
-                        self.loadDataFromJsonFile(localUrl: jsonFileUrl)
-                    })
-                }
+                    // Actualizamos bandera en UserDefaults para no volverlo a descargar
+                    defaults.set(true, forKey: "jsonDocumentIsAlreadyDownloaded")
+                    defaults.synchronize()
+                    
+                    // Hacemos el parsing del json y cargamos nuestro modelo
+                    bookArray = self.loadDataFromJsonFile(localUrl: jsonFileUrl)
+                })
             }
         }
+        
+        // Crear nuestro modelo Library
+        let library = Library(books: bookArray)
+//        print("\(library)")
+        
         
         let libraryVC = LibraryViewController(nibName: "LibraryViewController", bundle: nil)
         let navController = UINavigationController(rootViewController: libraryVC)
@@ -59,7 +63,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func loadDataFromJsonFile(localUrl: URL) {
+    func loadDataFromJsonFile(localUrl: URL) -> [Book] {
         
         do {
             // Pasamos la url a la función encargada de iniciar el parsing
@@ -76,7 +80,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     print("Error al procesar \(dict)")
                 }
             }
-            print("\(books)")
+            
+            return books;
             
         } catch {
             
