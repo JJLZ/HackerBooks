@@ -50,10 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Crear nuestro modelo Library
         let library = Library(books: bookArray)
-//        print("\(library)")
         
-        
-        let libraryVC = LibraryViewController(nibName: "LibraryViewController", bundle: nil)
+        let libraryVC = LibraryViewController(model: library)
         let navController = UINavigationController(rootViewController: libraryVC)
         
         window = UIWindow(frame: UIScreen.main.bounds)

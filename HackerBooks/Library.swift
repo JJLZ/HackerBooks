@@ -92,6 +92,12 @@ class Library {
 //        print("count \(almacen.count)")
     }
     
+//    // Cantidad de temáticas (tag) dentro de nuestra Librería
+//    func tagCount() -> Int {
+//        
+//        return self.almacen.keys.count
+//    }
+    
     // Cantidad de libros que hay un una temática.
     // Si el tag no existe, debe de devolver cero.
     func bookCount(forTagName name: TagName) -> Int {
