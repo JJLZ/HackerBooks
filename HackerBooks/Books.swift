@@ -43,16 +43,12 @@ class Book: Hashable {
     }
     
     //-- Hashable --
-    private var scalarArray: [UInt32] = []
-    
-    // required var for the Hashable protocol
-    var hashValue: Int {
-
-        return self.scalarArray.reduce(5381) {
-            ($0 << 5) &+ $0 &+ Int($1)
+    var hashValue : Int {
+        get {
+            return self.title.hashValue
         }
     }
-    
+    //--
 }
 
 // MARK: Protocols

@@ -28,28 +28,35 @@ class Library {
     }
     
     // MARK: Initialization
-//    init(books: BooksArray, tags: TagsArray) {
     init(books: BooksArray) {
         
         self.books = books;
-//        self.tags = tags;
         
-        var allTags:[TagName] = []
+        // Obtener el array de tags de todos los libros
+        var allTags:[Tag] = []
         for book in self.books {
             
-            allTags.append(contentsOf: book.tags.na)
+            allTags.append(contentsOf: book.tags)
         }
-        print("\(allTags.count)")
         
-//        self.tags = Array(Set(allTags))
-//        print("\(self.tags.count)")
-        let integers = [1, 4, 2, 2, 6, 24, 15, 2, 60, 15, 6]
-        let integersOrderedSetValue = integers.orderedSetValue //  [1, 4, 2, 6, 24, 15, 60]
-        print("\(integersOrderedSetValue)")
+        // Obtener array de Tag ordenado y sin elementos duplicados
+        // para usuarlo como key en el multidictionary
+
+        // eliminando duplicados
+        let uniqueArray:[Tag] = Array(Set(allTags))
         
-        self.tags = allTags.unique
-        print("\(self.tags.count)")
+        // ordenando los tags en orden alfabetico
+        var sortedArray:[Tag] = uniqueArray.sorted(by: {$0.name < $1.name})
         
+        // agregando el tag "Favorito" como primer elemento del array ordenado
+        let tagFavorite = Tag(name: "Favorite")
+        sortedArray.insert(tagFavorite, at: 0)
+        
+        // ya tenemos lo que buscamos
+        self.tags = sortedArray
+        print("\(self.tags)")
+        
+        // Cargar el multidictionary
         var almacen = MultiDictionary<TagName, Book>()
         
         almacen.insert(value: self.books[0], forKey: "Hola")
@@ -77,18 +84,6 @@ class Library {
 //    func book(forTagName name: TagName, at: Int) -> Book? {
 //        
 //    }
-}
-
-extension Array where Element: Equatable {
-    var orderedSetValue: Array  {
-        return reduce([]){ $0.contains($1) ? $0 : $0 + [$1] }
-    }
-}
-
-extension Array where Element : Hashable {
-    var unique: [Element] {
-        return Array(Set(self))
-    }
 }
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
