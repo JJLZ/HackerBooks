@@ -25,7 +25,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x3M-ms-uFL" userLabel="Image Stack View">
                                 <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="p0u-VD-SNl" userLabel="ivPhoto">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p0u-VD-SNl" userLabel="ivPhoto">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="80" id="3JX-kI-c8X"/>
@@ -53,7 +53,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblTags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXj-nM-BBA">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="lblTags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXj-nM-BBA">
                                         <rect key="frame" x="0.0" y="61.5" width="269" height="18.5"/>
                                         <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="14"/>
                                         <nil key="textColor"/>
@@ -63,6 +63,11 @@
                             </stackView>
                         </subviews>
                     </stackView>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tt1-cD-nhd" userLabel="spinner">
+                        <rect key="frame" x="32" y="30" width="37" height="37"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="rGW-0m-qwg" firstAttribute="top" secondItem="zLv-Ic-7bw" secondAttribute="topMargin" id="30t-4X-YvN"/>
@@ -76,11 +81,9 @@
                 <outlet property="lblAuthors" destination="dKd-Xp-3Fh" id="vrd-IY-t0T"/>
                 <outlet property="lblTags" destination="BXj-nM-BBA" id="XNg-wv-nQb"/>
                 <outlet property="lblTitle" destination="nht-Hz-hxc" id="KJs-tb-aka"/>
+                <outlet property="spinner" destination="tt1-cD-nhd" id="RiF-B0-3Jf"/>
             </connections>
-            <point key="canvasLocation" x="-674" y="-328"/>
+            <point key="canvasLocation" x="-1442" y="-661"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="book" width="102" height="102"/>
-    </resources>
 </document>

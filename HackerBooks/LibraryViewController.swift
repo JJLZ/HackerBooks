@@ -79,6 +79,10 @@ class LibraryViewController: UITableViewController {
         let book: Book = model.book(forTagName: tag.name, at: indexPath.row)!
         
         // Fill the cell
+        //--newcode image --
+        cell.downloadCoverImage(imageURL: book.imageUrl, id: book.hashValue)
+        //--
+        
         cell.lblTitle?.text = book.title
         cell.lblAuthors?.text = book.authors.joined(separator: ", ")
         cell.lblTags?.text = book.tagsInString

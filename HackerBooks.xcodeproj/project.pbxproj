@@ -20,6 +20,7 @@
 		8826542B1E3CB699005E8D22 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826542A1E3CB699005E8D22 /* Library.swift */; };
 		882654301E3CFFB9005E8D22 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */; };
 		882654321E3D008F005E8D22 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882654311E3D008F005E8D22 /* Errors.swift */; };
+		888609B21E46CE3300F68013 /* libro.png in Resources */ = {isa = PBXBuildFile; fileRef = 888609B11E46CE3300F68013 /* libro.png */; };
 		88864A1F1E43C1D9003AC5EC /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88864A1E1E43C1D9003AC5EC /* Tags.swift */; };
 		88864A211E43C986003AC5EC /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88864A201E43C986003AC5EC /* Authors.swift */; };
 		88C944081E4500B5002CAF47 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C944071E4500B5002CAF47 /* Downloader.swift */; };
@@ -43,6 +44,7 @@
 		8826542A1E3CB699005E8D22 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
 		882654311E3D008F005E8D22 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		888609B11E46CE3300F68013 /* libro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = libro.png; sourceTree = "<group>"; };
 		88864A1E1E43C1D9003AC5EC /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		88864A201E43C986003AC5EC /* Authors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
 		88C944071E4500B5002CAF47 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 		882654271E3CB5FE005E8D22 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				888609B11E46CE3300F68013 /* libro.png */,
 				8826541F1E3CB3A4005E8D22 /* Info.plist */,
 				8826541C1E3CB3A4005E8D22 /* LaunchScreen.storyboard */,
 				8826542C1E3CB88E005E8D22 /* JSON */,
@@ -206,6 +209,7 @@
 			files = (
 				88228FEC1E414B9C00450F39 /* LibraryViewController.xib in Resources */,
 				880519C41E4697EF000E43E1 /* CustomTableViewCell.xib in Resources */,
+				888609B21E46CE3300F68013 /* libro.png in Resources */,
 				88228FE41E41490C00450F39 /* Main.storyboard in Resources */,
 				8826541E1E3CB3A4005E8D22 /* LaunchScreen.storyboard in Resources */,
 				8826541B1E3CB3A4005E8D22 /* Assets.xcassets in Resources */,
