@@ -20,6 +20,9 @@
 		8826542B1E3CB699005E8D22 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826542A1E3CB699005E8D22 /* Library.swift */; };
 		882654301E3CFFB9005E8D22 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */; };
 		882654321E3D008F005E8D22 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882654311E3D008F005E8D22 /* Errors.swift */; };
+		886742931E47B34900EAEDF7 /* PDFViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886742911E47B34900EAEDF7 /* PDFViewerViewController.swift */; };
+		886742941E47B34900EAEDF7 /* PDFViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886742921E47B34900EAEDF7 /* PDFViewerViewController.xib */; };
+		886742961E47BDF200EAEDF7 /* libro.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 886742951E47BDF200EAEDF7 /* libro.pdf */; };
 		888609B21E46CE3300F68013 /* libro.png in Resources */ = {isa = PBXBuildFile; fileRef = 888609B11E46CE3300F68013 /* libro.png */; };
 		888609B51E46DA9D00F68013 /* BookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888609B31E46DA9D00F68013 /* BookViewController.swift */; };
 		888609B61E46DA9D00F68013 /* BookViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 888609B41E46DA9D00F68013 /* BookViewController.xib */; };
@@ -46,6 +49,9 @@
 		8826542A1E3CB699005E8D22 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
 		882654311E3D008F005E8D22 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		886742911E47B34900EAEDF7 /* PDFViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewerViewController.swift; sourceTree = "<group>"; };
+		886742921E47B34900EAEDF7 /* PDFViewerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFViewerViewController.xib; sourceTree = "<group>"; };
+		886742951E47BDF200EAEDF7 /* libro.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = libro.pdf; sourceTree = "<group>"; };
 		888609B11E46CE3300F68013 /* libro.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = libro.png; sourceTree = "<group>"; };
 		888609B31E46DA9D00F68013 /* BookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookViewController.swift; sourceTree = "<group>"; };
 		888609B41E46DA9D00F68013 /* BookViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BookViewController.xib; sourceTree = "<group>"; };
@@ -129,6 +135,8 @@
 				880519C21E4697EF000E43E1 /* CustomTableViewCell.xib */,
 				888609B31E46DA9D00F68013 /* BookViewController.swift */,
 				888609B41E46DA9D00F68013 /* BookViewController.xib */,
+				886742911E47B34900EAEDF7 /* PDFViewerViewController.swift */,
+				886742921E47B34900EAEDF7 /* PDFViewerViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -136,6 +144,7 @@
 		882654271E3CB5FE005E8D22 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				886742951E47BDF200EAEDF7 /* libro.pdf */,
 				888609B11E46CE3300F68013 /* libro.png */,
 				8826541F1E3CB3A4005E8D22 /* Info.plist */,
 				8826541C1E3CB3A4005E8D22 /* LaunchScreen.storyboard */,
@@ -215,11 +224,13 @@
 			files = (
 				88228FEC1E414B9C00450F39 /* LibraryViewController.xib in Resources */,
 				880519C41E4697EF000E43E1 /* CustomTableViewCell.xib in Resources */,
+				886742961E47BDF200EAEDF7 /* libro.pdf in Resources */,
 				888609B61E46DA9D00F68013 /* BookViewController.xib in Resources */,
 				888609B21E46CE3300F68013 /* libro.png in Resources */,
 				88228FE41E41490C00450F39 /* Main.storyboard in Resources */,
 				8826541E1E3CB3A4005E8D22 /* LaunchScreen.storyboard in Resources */,
 				8826541B1E3CB3A4005E8D22 /* Assets.xcassets in Resources */,
+				886742941E47B34900EAEDF7 /* PDFViewerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,6 +253,7 @@
 				88C944081E4500B5002CAF47 /* Downloader.swift in Sources */,
 				880519C31E4697EF000E43E1 /* CustomTableViewCell.swift in Sources */,
 				88864A1F1E43C1D9003AC5EC /* Tags.swift in Sources */,
+				886742931E47B34900EAEDF7 /* PDFViewerViewController.swift in Sources */,
 				88864A211E43C986003AC5EC /* Authors.swift in Sources */,
 				88228FEE1E41564800450F39 /* FoundationExtensions.swift in Sources */,
 			);

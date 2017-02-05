@@ -94,8 +94,11 @@ class BookViewController: UIViewController {
     }
         
     // MARK: IBActions
-    @IBAction func readBook(_ sender: Any) {
-        
+    @IBAction func readBook(_ sender: UIBarButtonItem) {
+     
+        // Presentar el view controller para leer el pdf seleccionado
+        let pdfVC = PDFViewerViewController(model: self.model)
+        self.navigationController?.pushViewController(pdfVC, animated: true)
     }
     
     @IBAction func isFavoriteChange(_ sender: UIBarButtonItem) {
