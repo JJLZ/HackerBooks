@@ -1,5 +1,5 @@
 //
-//  CustomTableViewCell.swift
+//  BookViewController.swift
 //  HackerBooks
 //
 //  Created by JJLZ on 2/4/17.
@@ -8,26 +8,70 @@
 
 import UIKit
 
-class CustomTableViewCell: UITableViewCell {
+class BookViewController: UIViewController {
     
     // MARK: IBOutlets
-    @IBOutlet weak var ivPhoto: UIImageView!
-    @IBOutlet weak var lblTitle: UILabel!
-    @IBOutlet weak var lblAuthors: UILabel!
-    @IBOutlet weak var lblTags: UILabel!
+    @IBOutlet weak var ivCover: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var btnFavorite: UIBarButtonItem!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    // MARK: Properties
+    var model: Book
+    
+    var isFavorite : Bool {
+//        willSet {
+//            // Un observador de los cambios en una propiedad
+//            print("about to change master")
+//        }
+        didSet {
+            if isFavorite {
+                btnFavorite.image = UIImage(named: "Favorite")
+            } else {
+                btnFavorite.image = UIImage(named: "noFavorite")
+            }
+        }
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    // MARK: Intialization
+    init(model: Book){
         
-        // Configure the view for the selected state
+        self.model = model
+        isFavorite = false
+        
+        super.init(nibName: nil, bundle: nil)
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: View Lifecycle
+
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        // Descargar cover de libro
+        downloadCoverImage(imageURL: model.imageUrl)
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    
+    // MARK: Methods
     func downloadCoverImage(imageURL: URL) {
         
         let defaultImageAsData = try! Data(contentsOf: Bundle.main.url(forResource: "libro", withExtension: "png")!)
@@ -37,11 +81,21 @@ class CustomTableViewCell: UITableViewCell {
         spinner.startAnimating()
         
         asyncData.delegate = self
-        ivPhoto.image = UIImage(data: asyncData.data)
+        ivCover.image = UIImage(data: asyncData.data)
+    }
+    
+    // MARK: IBActions
+    @IBAction func readBook(_ sender: Any) {
+        
+    }
+    
+    @IBAction func isFavoriteChange(_ sender: UIBarButtonItem) {
+        
+        self.isFavorite = !self.isFavorite
     }
 }
 
-extension CustomTableViewCell: AsyncDataDelegate {
+extension BookViewController: AsyncDataDelegate {
     
     func asyncData(_ sender: AsyncData, shouldStartLoadingFrom url: URL) -> Bool {
         // nos pregunta si puede hacer la descarga.
@@ -51,17 +105,17 @@ extension CustomTableViewCell: AsyncDataDelegate {
     
     func asyncData(_ sender: AsyncData, willStartLoadingFrom url: URL) {
         // Nos avisa que va a empezar
-
+        
     }
     
     func asyncData(_ sender: AsyncData, didEndLoadingFrom url: URL) {
         
         // la actualizo, y encima con una animación (más en el avanzado)
-        UIView.transition(with: ivPhoto,
+        UIView.transition(with: ivCover,
                           duration: 0.7,
                           options: [.transitionCrossDissolve],
                           animations: {
-                            self.ivPhoto.image = UIImage(data: sender.data)
+                            self.ivCover.image = UIImage(data: sender.data)
         }, completion: nil)
         
         spinner.stopAnimating()

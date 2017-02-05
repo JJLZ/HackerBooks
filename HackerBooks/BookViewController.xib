@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BookViewController" customModule="HackerBooks" customModuleProvider="target">
+            <connections>
+                <outlet property="btnFavorite" destination="6hX-E9-7oM" id="kf2-GD-IYL"/>
+                <outlet property="ivCover" destination="O8V-pA-7Kh" id="daY-AP-1SR"/>
+                <outlet property="spinner" destination="Fd8-xR-9EQ" id="oyf-cI-MoH"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="9Le-V6-ZcA" userLabel="Root Stack View">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="249" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="O8V-pA-7Kh">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="623"/>
+                        </imageView>
+                        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cx1-s5-QuZ">
+                            <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="lMp-UT-kmW"/>
+                            </constraints>
+                            <items>
+                                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="OXk-pH-DAZ"/>
+                                <barButtonItem systemItem="bookmarks" id="Tng-Ah-UqM">
+                                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </barButtonItem>
+                                <barButtonItem style="plain" systemItem="flexibleSpace" id="eAZ-vw-uX8"/>
+                                <barButtonItem image="noFavorite" id="6hX-E9-7oM" userLabel="Favorite">
+                                    <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="isFavoriteChange:" destination="-1" id="ih0-Tm-GLy"/>
+                                    </connections>
+                                </barButtonItem>
+                                <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="zMm-gc-r7L"/>
+                            </items>
+                        </toolbar>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="O8V-pA-7Kh" firstAttribute="top" secondItem="9Le-V6-ZcA" secondAttribute="top" id="DBz-ln-geO"/>
+                        <constraint firstItem="O8V-pA-7Kh" firstAttribute="leading" secondItem="9Le-V6-ZcA" secondAttribute="leading" id="FR9-LD-X1r"/>
+                        <constraint firstAttribute="bottom" secondItem="Cx1-s5-QuZ" secondAttribute="bottom" id="G1v-ia-fSS"/>
+                        <constraint firstItem="Cx1-s5-QuZ" firstAttribute="top" secondItem="O8V-pA-7Kh" secondAttribute="bottom" id="K3b-ub-fza"/>
+                        <constraint firstItem="Cx1-s5-QuZ" firstAttribute="leading" secondItem="9Le-V6-ZcA" secondAttribute="leading" id="Vi5-GC-wKr"/>
+                        <constraint firstAttribute="trailing" secondItem="Cx1-s5-QuZ" secondAttribute="trailing" id="sZS-dd-hKN"/>
+                        <constraint firstAttribute="trailing" secondItem="O8V-pA-7Kh" secondAttribute="trailing" id="vDJ-1q-5mw"/>
+                    </constraints>
+                </stackView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Fd8-xR-9EQ" userLabel="spinner">
+                    <rect key="frame" x="169" y="315" width="37" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="5Kh-9Z-LRs"/>
+                        <constraint firstAttribute="width" constant="37" id="VjD-j8-lG3"/>
+                    </constraints>
+                    <color key="color" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="9Le-V6-ZcA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="0dv-LN-cjS"/>
+                <constraint firstItem="9Le-V6-ZcA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DUF-8H-eGM"/>
+                <constraint firstAttribute="trailing" secondItem="9Le-V6-ZcA" secondAttribute="trailing" id="JCd-Gz-KSe"/>
+                <constraint firstAttribute="bottom" secondItem="9Le-V6-ZcA" secondAttribute="bottom" id="R4E-ec-Ozk"/>
+                <constraint firstItem="Fd8-xR-9EQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="U8p-PR-Q6z"/>
+                <constraint firstItem="Fd8-xR-9EQ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="nEd-lI-i0G"/>
+            </constraints>
+            <point key="canvasLocation" x="-879" y="-51"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="noFavorite" width="22" height="22"/>
+    </resources>
+</document>

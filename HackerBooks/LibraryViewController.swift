@@ -78,16 +78,24 @@ class LibraryViewController: UITableViewController {
         let tag: Tag = model.tags[indexPath.section]
         let book: Book = model.book(forTagName: tag.name, at: indexPath.row)!
         
-        // Fill the cell
-        //--newcode image --
-        cell.downloadCoverImage(imageURL: book.imageUrl, id: book.hashValue)
-        //--
-        
+        // Fill with book info
+        cell.downloadCoverImage(imageURL: book.imageUrl)    // download image
         cell.lblTitle?.text = book.title
         cell.lblAuthors?.text = book.authors.joined(separator: ", ")
         cell.lblTags?.text = book.tagsInString
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        // Obtener el libro correspondiente al sell seleccionado
+        let tag: Tag = model.tags[indexPath.section]
+        let book: Book = model.book(forTagName: tag.name, at: indexPath.row)!
+        
+        // Presentar el book view controller con el book seleccionado
+        let bookVC = BookViewController(model: book)
+        self.navigationController?.pushViewController(bookVC, animated: true)
     }
 }
 
