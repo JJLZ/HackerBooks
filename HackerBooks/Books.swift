@@ -14,13 +14,22 @@ class Book: Hashable {
     // MARK: Stored Properties
     let title: String
     let authors: [String]
-    let tags: [Tag]
     let imageUrl: URL
     let pdfUrl: URL
     
-    let isFavorite: Bool = false
+    var tags: [Tag]
+    var isFavorite : Bool
     
     // MARK: Computed properties
+    
+    //-- Hashable --
+    var hashValue : Int {
+        get {
+            return self.title.hashValue
+        }
+    }
+    //--
+    
     var tagsInString: String {
         
         // a computed getter
@@ -46,6 +55,14 @@ class Book: Hashable {
         self.tags = tags;
         self.imageUrl = imageUrl;
         self.pdfUrl = pdfUrl;
+        self.isFavorite = UserDefaults.standard.bool(forKey: String(title.hashValue))
+        
+        //-- Agregar tag "favorite" cuando si el setting lo indica --//
+        if self.isFavorite {
+            let favoriteTag: Tag = Tag(name: "favorite")
+            self.tags.append(favoriteTag)
+        }
+        // --
     }
     
     // MARK: Proxies
@@ -58,14 +75,6 @@ class Book: Hashable {
         
         return proxyForEquality()
     }
-    
-    //-- Hashable --
-    var hashValue : Int {
-        get {
-            return self.title.hashValue
-        }
-    }
-    //--
 }
 
 // MARK: Protocols
@@ -84,14 +93,6 @@ extension Book: CustomStringConvertible {
         }
     }
 }
-
-//extension Book: Equatable {
-//    
-//    public static func ==(lhs: Book, rhs: Book) -> Bool {
-//        
-//        return (lhs.proxyForEquality() == rhs.proxyForEquality())
-//    }
-//}
 
 extension Book: Comparable {
     

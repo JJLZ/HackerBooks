@@ -15,15 +15,21 @@ class BookViewController: UIViewController {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var btnFavorite: UIBarButtonItem!
     
+    // MARK: Constant
+    static let notificationName = Notification.Name(rawValue: "FavoriteTagDidChange")
+    static let BookKey = "BookKey"
+    
     // MARK: Properties
     var model: Book
     
     var isFavorite : Bool {
-//        willSet {
-//            // Un observador de los cambios en una propiedad
-//            print("about to change master")
-//        }
+        
         didSet {
+            
+            // actualizar estado en nuestro book
+            model.isFavorite = self.isFavorite
+            
+            // Cambiar imagen de acuerdo al estado
             if isFavorite {
                 btnFavorite.image = UIImage(named: "Favorite")
             } else {
@@ -36,7 +42,7 @@ class BookViewController: UIViewController {
     init(model: Book){
         
         self.model = model
-        isFavorite = false
+        isFavorite = model.isFavorite
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -53,6 +59,9 @@ class BookViewController: UIViewController {
         
         // Descargar cover de libro
         downloadCoverImage(imageURL: model.imageUrl)
+        
+        // set favorite state
+        isFavorite = model.isFavorite
     }
 
     override func didReceiveMemoryWarning() {
@@ -83,7 +92,7 @@ class BookViewController: UIViewController {
         asyncData.delegate = self
         ivCover.image = UIImage(data: asyncData.data)
     }
-    
+        
     // MARK: IBActions
     @IBAction func readBook(_ sender: Any) {
         
@@ -91,9 +100,15 @@ class BookViewController: UIViewController {
     
     @IBAction func isFavoriteChange(_ sender: UIBarButtonItem) {
         
+        // cambiar estado de la propiedad "Favorite"
         self.isFavorite = !self.isFavorite
+        
+        // notificamos a los interesados y les pasamos el Book modificado
+        notify(bookChanged: self.model)
     }
 }
+
+// MARK: Delegates
 
 extension BookViewController: AsyncDataDelegate {
     
@@ -122,6 +137,25 @@ extension BookViewController: AsyncDataDelegate {
         spinner.isHidden = true
     }
 }
+
+// MARK: Notifications
+
+extension BookViewController {
+
+    // Notificar a los interedos cuando la propiedad isFavorite de un Book ha cambiado
+    func notify(bookChanged book: Book) {
+        
+        // crear una instancia del notification center
+        let nc = NotificationCenter.default
+        
+        // crear un objeto notificacion
+        let notification = Notification(name: BookViewController.notificationName, object: self, userInfo: [BookViewController.BookKey: book])
+        
+        // Lo mandas
+        nc.post(notification)
+    }
+}
+
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 

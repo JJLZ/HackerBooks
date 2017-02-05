@@ -21,14 +21,6 @@ class Library {
     var tags: [Tag]
     var almacen = MultiDictionary<Tag, Book>()
     
-//    var booksCount: Int {
-//        
-//        get {
-//            let count: Int = self.books.count
-//            return count
-//        }
-//    }
-    
     // MARK: Initialization
     init(books: BooksArray) {
         
@@ -50,7 +42,7 @@ class Library {
         var sortedArray:[Tag] = uniqueArray.sorted(by: {$0.name < $1.name})
         
         // agregando el tag "Favorite" como primer elemento del array ordenado
-        let tagFavorite = Tag(name: "Favorite")
+        let tagFavorite = Tag(name: "favorite")
         sortedArray.insert(tagFavorite, at: 0)
         
         // ya tenemos lo que buscamos
@@ -58,6 +50,12 @@ class Library {
         
         // Cargar el multidictionary
         loadDepot(tags: self.tags, books: self.books)
+    }
+    
+    deinit {
+    
+        // Limipamos la casa
+        unsubscribeOfNotifications()
     }
     
     // Cargamos el multidictionary
@@ -75,29 +73,11 @@ class Library {
                 }
             }
         }
-
-        //--newcode test --//
-//        let tagCont: Int = self.bookCount(forTagName: "algorithms")
-//        print("\(tagCont)")
-//        
-//        let tabBooks: [Book]? = self.books(forTagName: "algorithms")
-//        print("\(tabBooks)")
-//        
-//        let elemento1: Book? = self.book(forTagName: "algorithms", at: 1)
-//        print("\(elemento1)")
         
-//        print("keys.count \(almacen.keys.count)")
-//        print("countUnique \(almacen.countUnique)")
-//        print("countBuckets \(almacen.countBuckets)")
-//        print("count \(almacen.count)")
+        // Nos suscribimos a Notifications para detectar camibos en Favorites
+        subscribeToNotifications()
     }
-    
-//    // Cantidad de temáticas (tag) dentro de nuestra Librería
-//    func tagCount() -> Int {
-//        
-//        return self.almacen.keys.count
-//    }
-    
+            
     // Cantidad de libros que hay un una temática.
     // Si el tag no existe, debe de devolver cero.
     func bookCount(forTagName name: TagName) -> Int {
@@ -132,6 +112,72 @@ class Library {
         return allBooks?[at] ?? nil
     }
 }
+
+// MARK: Notification
+
+extension Library {
+    
+    func subscribeToNotifications() {
+        
+        let nc = NotificationCenter.default
+        
+        nc.addObserver(forName: BookViewController.notificationName, object: nil, queue: OperationQueue.main) { (note: Notification) in
+            
+            // extraigo el libro de la notificacion
+            let userInfo = note.userInfo
+            let book: Book = userInfo?[BookViewController.BookKey] as! Book
+            print("\(book)")
+            
+            //-- Guardar en Userdefaults el nuevo estado para "favorite" --
+            // Nota: tomamos el hashValue del title como identificador único
+            let defaults = UserDefaults.standard
+            defaults.set(book.isFavorite, forKey: String(book.title.hashValue))
+            defaults.synchronize()
+            //--
+            
+            //-- Actualizar los tags del Book y el almacen para el tag "favorite" --
+            let favoriteTag: Tag = Tag(name: "favorite")
+            
+            if book.isFavorite {
+                
+                // agregar tag "favorite" al libro
+                book.tags.append(favoriteTag)
+                
+                // agregar libro al los favoritos en el almacen
+                self.almacen.insert(value: book, forKey: favoriteTag)
+            } else {
+                
+                // eliminar tag "favorite" al libro
+                book.tags = book.tags.filter{$0 != favoriteTag}
+                
+                // remover libro del Favoritos en el almacen
+                self.almacen.remove(value: book, fromKey: favoriteTag)
+            }
+            //--
+        }
+    }
+    
+    func unsubscribeOfNotifications() {
+        
+        let nc = NotificationCenter.default
+        nc.removeObserver(self)
+    }
+}
+
+//let tagCont: Int = self.bookCount(forTagName: "algorithms")
+//print("\(tagCont)")
+//
+//let tabBooks: [Book]? = self.books(forTagName: "algorithms")
+//print("\(tabBooks)")
+//
+//let elemento1: Book? = self.book(forTagName: "algorithms", at: 1)
+//print("\(elemento1)")
+//
+//print("keys.count \(almacen.keys.count)")
+//print("countUnique \(almacen.countUnique)")
+//print("countBuckets \(almacen.countBuckets)")
+//print("count \(almacen.count)")
+
 
 //[<Tag: Favorite>, <Tag: access controls>, <Tag: algorithms>, <Tag: android>, <Tag: artificial intelligence>, <Tag: c>, <Tag: coffeescript>, <Tag: community management>, <Tag: compilers>, <Tag: control theory>, <Tag: cryptography>, <Tag: cs>, <Tag: data mining>, <Tag: data structures>, <Tag: data visualization>, <Tag: databases>, <Tag: design>, <Tag: distributed systems>, <Tag: distributed version control system>, <Tag: dvcs>, <Tag: foss>, <Tag: functional>, <Tag: game theory>, <Tag: git>, <Tag: go>, <Tag: golang>, <Tag: graphics>, <Tag: gtd>, <Tag: haskell>, <Tag: html5>, <Tag: information theory>, <Tag: java>, <Tag: javascript>, <Tag: js>, <Tag: learning algorithms>, <Tag: linear algebra>, <Tag: machine learning>, <Tag: math>, <Tag: matrix computations>, <Tag: mercurial>, <Tag: mongodb>, <Tag: nosql>, <Tag: open source>, <Tag: open source processes>, <Tag: optimization>, <Tag: parsing>, <Tag: php>, <Tag: planning>, <Tag: practical>, <Tag: programing>, <Tag: programming>, <Tag: python>, <Tag: robotics>, <Tag: security>, <Tag: statistics>, <Tag: subversion>, <Tag: text processing>, <Tag: tutorials>, <Tag: veracity>, <Tag: version control>, <Tag: vim>, <Tag: web development>, <Tag: web-design>]
 

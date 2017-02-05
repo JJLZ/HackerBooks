@@ -23,6 +23,12 @@ class LibraryViewController: UITableViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    deinit {
+    
+        // limpiar la casa
+        unsubscribeOfNotifications()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -35,10 +41,13 @@ class LibraryViewController: UITableViewController {
         
         self.title = "Hacker Books"
         
+        // detectar cambios para actualizar la sección "Favorite"
+        subscribeToNotifications()
+        
         // registrar el custom cell
         tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdetifier)
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -63,6 +72,31 @@ class LibraryViewController: UITableViewController {
         let name = tag.name.capitalized
         
         return name
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        let defaultHeight: CGFloat = 35.0
+        var headerHeight: CGFloat
+        
+        switch section {
+    
+        case 0: // sección "Favorite"
+    
+            // "Esconder" el header cuando no tengamos favoritos
+            if model.bookCount(forTagName: "favorite") == 0 {
+            
+                headerHeight = 0.0
+            } else {
+                
+                headerHeight = defaultHeight
+            }
+            
+        default:
+            headerHeight = defaultHeight
+        }
+
+        return headerHeight
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -96,6 +130,28 @@ class LibraryViewController: UITableViewController {
         // Presentar el book view controller con el book seleccionado
         let bookVC = BookViewController(model: book)
         self.navigationController?.pushViewController(bookVC, animated: true)
+    }
+}
+
+// MARK: Notification
+
+extension LibraryViewController {
+    
+    func subscribeToNotifications() {
+        
+        let nc = NotificationCenter.default
+        
+        nc.addObserver(forName: BookViewController.notificationName, object: nil, queue: OperationQueue.main) { (note: Notification) in
+            
+            //--newcode favorite mejorar --//
+            self.tableView.reloadData()
+        }
+    }
+    
+    func unsubscribeOfNotifications() {
+        
+        let nc = NotificationCenter.default
+        nc.removeObserver(self)
     }
 }
 

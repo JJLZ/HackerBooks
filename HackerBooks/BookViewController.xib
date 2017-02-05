@@ -36,7 +36,7 @@
                             <items>
                                 <barButtonItem width="42" style="plain" systemItem="fixedSpace" id="OXk-pH-DAZ"/>
                                 <barButtonItem systemItem="bookmarks" id="Tng-Ah-UqM">
-                                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </barButtonItem>
                                 <barButtonItem style="plain" systemItem="flexibleSpace" id="eAZ-vw-uX8"/>
                                 <barButtonItem image="noFavorite" id="6hX-E9-7oM" userLabel="Favorite">
@@ -77,7 +77,7 @@
                 <constraint firstItem="Fd8-xR-9EQ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="U8p-PR-Q6z"/>
                 <constraint firstItem="Fd8-xR-9EQ" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="nEd-lI-i0G"/>
             </constraints>
-            <point key="canvasLocation" x="-879" y="-51"/>
+            <point key="canvasLocation" x="-1148" y="-67"/>
         </view>
     </objects>
     <resources>
