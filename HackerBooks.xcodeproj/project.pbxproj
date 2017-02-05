@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		880519C31E4697EF000E43E1 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 880519C11E4697EF000E43E1 /* CustomTableViewCell.swift */; };
+		880519C41E4697EF000E43E1 /* CustomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 880519C21E4697EF000E43E1 /* CustomTableViewCell.xib */; };
 		88228FE41E41490C00450F39 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88228FE31E41490C00450F39 /* Main.storyboard */; };
 		88228FEB1E414B9C00450F39 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88228FE91E414B9C00450F39 /* LibraryViewController.swift */; };
 		88228FEC1E414B9C00450F39 /* LibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88228FEA1E414B9C00450F39 /* LibraryViewController.xib */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		880519C11E4697EF000E43E1 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		880519C21E4697EF000E43E1 /* CustomTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomTableViewCell.xib; sourceTree = "<group>"; };
 		88228FE31E41490C00450F39 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		88228FE91E414B9C00450F39 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		88228FEA1E414B9C00450F39 /* LibraryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryViewController.xib; sourceTree = "<group>"; };
@@ -115,6 +119,8 @@
 				882654131E3CB3A4005E8D22 /* AppDelegate.swift */,
 				88228FE91E414B9C00450F39 /* LibraryViewController.swift */,
 				88228FEA1E414B9C00450F39 /* LibraryViewController.xib */,
+				880519C11E4697EF000E43E1 /* CustomTableViewCell.swift */,
+				880519C21E4697EF000E43E1 /* CustomTableViewCell.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -199,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88228FEC1E414B9C00450F39 /* LibraryViewController.xib in Resources */,
+				880519C41E4697EF000E43E1 /* CustomTableViewCell.xib in Resources */,
 				88228FE41E41490C00450F39 /* Main.storyboard in Resources */,
 				8826541E1E3CB3A4005E8D22 /* LaunchScreen.storyboard in Resources */,
 				8826541B1E3CB3A4005E8D22 /* Assets.xcassets in Resources */,
@@ -221,6 +228,7 @@
 				882654301E3CFFB9005E8D22 /* JSONProcessing.swift in Sources */,
 				88D8F15E1E42BEFE009D0EB8 /* MultiDictionary.swift in Sources */,
 				88C944081E4500B5002CAF47 /* Downloader.swift in Sources */,
+				880519C31E4697EF000E43E1 /* CustomTableViewCell.swift in Sources */,
 				88864A1F1E43C1D9003AC5EC /* Tags.swift in Sources */,
 				88864A211E43C986003AC5EC /* Authors.swift in Sources */,
 				88228FEE1E41564800450F39 /* FoundationExtensions.swift in Sources */,

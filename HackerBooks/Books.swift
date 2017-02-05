@@ -20,6 +20,23 @@ class Book: Hashable {
     
     let isFavorite: Bool = false
     
+    // MARK: Computed properties
+    var tagsInString: String {
+        
+        // a computed getter
+        get {
+            
+            var arrayTagNames: [String] = []
+            
+            for tag in tags {
+                
+                arrayTagNames.append(tag.name)
+            }
+            
+            return arrayTagNames.joined(separator: ", ")
+        }
+    }
+    
     // MARK: Initialization
     
     init(title: String, authors: [String], tags: [Tag], imageUrl: URL, pdfUrl: URL) {

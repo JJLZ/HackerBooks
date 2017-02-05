@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomCell" rowHeight="97" id="RGw-M9-29b" customClass="CustomTableViewCell" customModule="HackerBooks" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="97"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RGw-M9-29b" id="zLv-Ic-7bw">
+                <rect key="frame" x="0.0" y="0.0" width="373" height="96"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="rGW-0m-qwg" userLabel="Root Stack View">
+                        <rect key="frame" x="8" y="8" width="357" height="80"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="x3M-ms-uFL" userLabel="Image Stack View">
+                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="p0u-VD-SNl" userLabel="ivPhoto">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="3JX-kI-c8X"/>
+                                            <constraint firstAttribute="width" constant="80" id="j6f-F5-jpC"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="p0u-VD-SNl" firstAttribute="top" secondItem="x3M-ms-uFL" secondAttribute="top" id="65L-bj-fs3"/>
+                                    <constraint firstItem="p0u-VD-SNl" firstAttribute="leading" secondItem="x3M-ms-uFL" secondAttribute="leading" id="m94-RJ-2iW"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" axis="vertical" distribution="equalSpacing" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="l6O-bt-NTE" userLabel="Labels Stack View">
+                                <rect key="frame" x="88" y="0.0" width="269" height="80"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblTitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nht-Hz-hxc">
+                                        <rect key="frame" x="0.0" y="0.0" width="269" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblAuthors" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKd-Xp-3Fh">
+                                        <rect key="frame" x="0.0" y="31.5" width="269" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lblTags" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BXj-nM-BBA">
+                                        <rect key="frame" x="0.0" y="61.5" width="269" height="18.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-MediumItalic" family="Futura" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="rGW-0m-qwg" firstAttribute="top" secondItem="zLv-Ic-7bw" secondAttribute="topMargin" id="30t-4X-YvN"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="rGW-0m-qwg" secondAttribute="trailing" id="SIk-nc-saR"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="rGW-0m-qwg" secondAttribute="bottom" id="XVS-dz-xNg"/>
+                    <constraint firstItem="rGW-0m-qwg" firstAttribute="leading" secondItem="zLv-Ic-7bw" secondAttribute="leadingMargin" id="zdI-GD-7Zt"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="ivPhoto" destination="p0u-VD-SNl" id="W07-Em-qjC"/>
+                <outlet property="lblAuthors" destination="dKd-Xp-3Fh" id="vrd-IY-t0T"/>
+                <outlet property="lblTags" destination="BXj-nM-BBA" id="XNg-wv-nQb"/>
+                <outlet property="lblTitle" destination="nht-Hz-hxc" id="KJs-tb-aka"/>
+            </connections>
+            <point key="canvasLocation" x="-674" y="-328"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="book" width="102" height="102"/>
+    </resources>
+</document>

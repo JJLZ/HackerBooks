@@ -8,6 +8,8 @@
 
 import UIKit
 
+let cellIdetifier: String = "CustomCell"
+
 class LibraryViewController: UITableViewController {
     
     // MARK: Properties
@@ -28,13 +30,13 @@ class LibraryViewController: UITableViewController {
     // MARK: ViewController lifecylce
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.title = "Hacker Books"
+        
+        // registrar el custom cell
+        tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdetifier)
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,28 +64,26 @@ class LibraryViewController: UITableViewController {
         
         return name
     }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 97.0
+    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cellId = "BooksCell"
-        
-        // Crear la celda
-        var cell = tableView.dequeueReusableCell(withIdentifier: cellId)
-
-        if cell == nil {
-            
-            // El opciónal está vacio y toca crear la celda desde cero
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellId)
-        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdetifier, for: indexPath) as! CustomTableViewCell
         
         // Obtener el book correspondiente al cell actual
         let tag: Tag = model.tags[indexPath.section]
         let book: Book = model.book(forTagName: tag.name, at: indexPath.row)!
         
         // Fill the cell
-        cell?.textLabel?.text = book.title
+        cell.lblTitle?.text = book.title
+        cell.lblAuthors?.text = book.authors.joined(separator: ", ")
+        cell.lblTags?.text = book.tagsInString
         
-        return cell!
+        return cell
     }
 }
 
