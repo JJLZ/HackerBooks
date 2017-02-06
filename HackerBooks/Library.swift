@@ -126,7 +126,6 @@ extension Library {
             // extraigo el libro de la notificacion
             let userInfo = note.userInfo
             let book: Book = userInfo?[BookViewController.BookKey] as! Book
-            print("\(book)")
             
             //-- Guardar en Userdefaults el nuevo estado para "favorite" --
             // Nota: tomamos el hashValue del title como identificador único

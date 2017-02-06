@@ -10,6 +10,10 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    // MARK: Constant
+    static let notificationName = Notification.Name(rawValue: "JSONLoadComplete")
+    static let LoadKey = "LoadKey"
 
     var window: UIWindow?
     
@@ -44,6 +48,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     // Hacemos el parsing del json y cargamos nuestro modelo
                     bookArray = self.loadDataFromJsonFile(localUrl: jsonFileUrl)
+                    
+                    //-- Crear library y enviarla como notificación --
+                    let library = Library(books: bookArray)
+                    self.sendLibraryFull(library: library)
+                    //--
                 })
             }
         }
@@ -107,6 +116,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+}
+
+// MARK: Notifications
+
+extension AppDelegate {
+    
+    // Prepar notificación para enviar library full cuando este lista
+    func sendLibraryFull(library: Library) {
+        
+        // crear una instancia del notification center
+        let nc = NotificationCenter.default
+        
+        // crear un objeto notificacion
+        let notification = Notification(name: AppDelegate.notificationName, object: self, userInfo: [AppDelegate.LoadKey: library])
+        
+        // Lo mandas
+        nc.post(notification)
     }
 }
 

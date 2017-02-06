@@ -13,7 +13,7 @@ let cellIdetifier: String = "CustomCell"
 class LibraryViewController: UITableViewController {
     
     // MARK: Properties
-    let model: Library
+    var model: Library
     
     // MARK: Initialization
     init(model: Library) {
@@ -38,6 +38,13 @@ class LibraryViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        //-- Si library llego vacío solitar recibir cuando este completa --
+        if model.books.isEmpty {
+            
+            self.subscribeToNotificationLibraryFull()
+        }
+        //--
         
         self.title = "Hacker Books"
         
@@ -154,6 +161,28 @@ extension LibraryViewController {
         nc.removeObserver(self)
     }
 }
+
+extension LibraryViewController {
+    
+    func subscribeToNotificationLibraryFull() {
+        
+        let nc = NotificationCenter.default
+        
+        nc.addObserver(forName: AppDelegate.notificationName, object: nil, queue: OperationQueue.main) { (note: Notification) in
+            
+            let userInfo = note.userInfo
+            let library: Library = userInfo?[AppDelegate.LoadKey] as! Library
+
+            // Cargar la libreria completa y cargar tabla
+            self.model = library
+            self.tableView.reloadData()
+            
+            // Stop listening notification
+            nc.removeObserver(self, name: AppDelegate.notificationName, object: nil);
+        }
+    }
+}
+
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
