@@ -61,10 +61,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let library = Library(books: bookArray)
         
         let libraryVC = LibraryViewController(model: library)
-        let navController = UINavigationController(rootViewController: libraryVC)
+        let leftNavC = UINavigationController(rootViewController: libraryVC)
+        
+        //-- ipad --
+        let splitVC = UISplitViewController()
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            // creamos un BookViewController (por defecto mostrando el primer libro en el library)
+            let bookVC = BookViewController(model: library.books[0])
+            // lo cargamos en un nuevo UINavigationController
+            let rigthNavC = UINavigationController(rootViewController: bookVC)
+            
+            // asignamos delegado
+            libraryVC.delegate = bookVC
+            
+            // Creamos el splitVC
+//            let splitVC = UISplitViewController()
+            splitVC.viewControllers = [leftNavC, rigthNavC]
+        }
+        //--
         
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = navController
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            window?.rootViewController = splitVC
+        } else {
+            window?.rootViewController = leftNavC
+        }
         window?.makeKeyAndVisible()
         
         return true

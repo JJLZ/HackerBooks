@@ -31,12 +31,29 @@ class PDFViewerViewController: UIViewController {
 
     // MARK: ViewController lifecycle
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(animated)
+        
+        subscribe()
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        // mostrar título del libro
+        self.title = model.title
 
         // Comenzar la descargad el PDF
         downloadPDF(pdfURL: model.pdfUrl)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        
+        super.viewWillDisappear(animated)
+        
+        unsubscribe()
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +97,31 @@ extension PDFViewerViewController: AsyncDataDelegate {
             
             self.vWeb.load(sender.data, mimeType: "application/pdf", textEncodingName:"", baseURL: url)
         }
+    }
+}
+
+// MARK: Notifications
+
+extension PDFViewerViewController {
+    
+    func subscribe() {
+
+        let nc = NotificationCenter.default
+        nc.addObserver(forName: LibraryViewController.notificationName, object: nil, queue: OperationQueue.main) {(note: Notification) in
+        
+            let userInfo = note.userInfo
+            let book = userInfo?[LibraryViewController.bookKey]
+            
+            self.model = book as! Book
+            self.title = self.model.title
+            self.downloadPDF(pdfURL: self.model.pdfUrl)
+        }
+    }
+    
+    func unsubscribe() {
+        
+        let nc = NotificationCenter.default
+        nc.removeObserver(self)
     }
 }
 

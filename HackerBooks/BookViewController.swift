@@ -57,28 +57,26 @@ class BookViewController: UIViewController {
         
         super.viewDidLoad()
         
-        // Descargar cover de libro
-        downloadCoverImage(imageURL: model.imageUrl)
-        
-        // set favorite state
-        isFavorite = model.isFavorite
+        syncViewWithView()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // MARK: Sync model -> View
+    func syncViewWithView(){
+        
+        // Descargar cover de libro
+        downloadCoverImage(imageURL: model.imageUrl)
+        
+        // set favorite state
+        isFavorite = model.isFavorite
+        
+        // set title
+        self.title = model.title
     }
-    */
     
     // MARK: Methods
     func downloadCoverImage(imageURL: URL) {
@@ -159,6 +157,16 @@ extension BookViewController {
     }
 }
 
+// MARK: Protocols
+extension BookViewController: LibraryViewControllerDelegate {
+    
+    func libraryViewController(_ lVC: LibraryViewController, didSelectBook book: Book) {
+        
+        // Cambiamos el modelo
+        self.model = book
+        self.syncViewWithView()
+    }
+}
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 

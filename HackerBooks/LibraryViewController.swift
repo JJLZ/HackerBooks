@@ -12,8 +12,13 @@ let cellIdetifier: String = "CustomCell"
 
 class LibraryViewController: UITableViewController {
     
+    // MARK: Constants
+    static let notificationName = Notification.Name(rawValue: "BookDidChange")
+    static let bookKey = "BookKey"
+    
     // MARK: Properties
     var model: Library
+    weak var delegate: LibraryViewControllerDelegate? = nil
     
     // MARK: Initialization
     init(model: Library) {
@@ -134,13 +139,23 @@ class LibraryViewController: UITableViewController {
         let tag: Tag = model.tags[indexPath.section]
         let book: Book = model.book(forTagName: tag.name, at: indexPath.row)!
         
-        // Presentar el book view controller con el book seleccionado
-        let bookVC = BookViewController(model: book)
-        self.navigationController?.pushViewController(bookVC, animated: true)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            
+            // Presentar el book view controller con el book seleccionado
+            let bookVC = BookViewController(model: book)
+            self.navigationController?.pushViewController(bookVC, animated: true)
+        } else { // para ipad
+        
+            // avisamos al delegado
+            delegate?.libraryViewController(self, didSelectBook: book)
+            
+            // mandamos una notificación
+            notifyBookHasChanged(newBook: book)
+        }
     }
 }
 
-// MARK: Notification
+// MARK: Notifications
 
 extension LibraryViewController {
     
@@ -150,7 +165,6 @@ extension LibraryViewController {
         
         nc.addObserver(forName: BookViewController.notificationName, object: nil, queue: OperationQueue.main) { (note: Notification) in
             
-            //--newcode favorite mejorar --//
             self.tableView.reloadData()
         }
     }
@@ -183,6 +197,22 @@ extension LibraryViewController {
     }
 }
 
+extension LibraryViewController {
+    
+    func notifyBookHasChanged(newBook book: Book) {
+        
+        let nc = NotificationCenter.default
+        let notification = Notification(name: LibraryViewController.notificationName, object: self, userInfo: [LibraryViewController.bookKey : book])
+        nc.post(notification)
+    }
+}
+
+// MARK: Protocols
+
+protocol LibraryViewControllerDelegate: class {
+    
+    func libraryViewController(_ lVC: LibraryViewController, didSelectBook book: Book)
+}
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
