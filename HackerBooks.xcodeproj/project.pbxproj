@@ -148,17 +148,9 @@
 				888609B11E46CE3300F68013 /* libro.png */,
 				8826541F1E3CB3A4005E8D22 /* Info.plist */,
 				8826541C1E3CB3A4005E8D22 /* LaunchScreen.storyboard */,
-				8826542C1E3CB88E005E8D22 /* JSON */,
 				8826541A1E3CB3A4005E8D22 /* Assets.xcassets */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		8826542C1E3CB88E005E8D22 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = JSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

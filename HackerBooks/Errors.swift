@@ -13,5 +13,5 @@ enum HackerBooksErrors: Error {
     case jsonParsingError
     case wrongURLFormatForJSONResource
     case resourcePointedByURLNotReachable
-    case wronJSONFormat
+    case wrongJSONFormat
 }

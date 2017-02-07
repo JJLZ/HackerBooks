@@ -17,35 +17,30 @@ typealias JSONArray         = [JSONDictionary]
 
 // MARK: - Loading
 
-//func loadJsonFileFrom(localUrl: URL) throws -> JSONArray {
-//    
-//    if let data = try? Data(contentsOf: localUrl),
-//        let maybeArray = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? JSONArray,
-//        let array = maybeArray {
-//        
-//        return array
-//    } else {
-//        throw HackerBooksErrors.jsonParsingError
-//    }
-//}
-
 func loadJsonFileFrom(localUrl: URL) throws -> JSONArray {
     
     if let data = try? Data(contentsOf: localUrl),
-        let maybeArray = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? JSONArray,
-        let array = maybeArray {
+        let maybeArray: Any = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) {
         
-        //--newcode Array o Diccionario --
-        // http://stackoverflow.com/questions/28325268/convert-array-to-json-string-in-swift
-        // http://stackoverflow.com/questions/30480672/how-to-convert-a-json-string-to-a-dictionary
-        //--
+        if let array = (maybeArray as? NSArray) as Array? { // Es un array de diccionarios
+            
+            return (array as? JSONArray)!
+            
+        } else if let dic = (maybeArray as? NSDictionary) as Dictionary? { // Es un diccionario
+            
+            // metemos el diccionario dentro de un array antes de regresarlo
+            let array: [JSONDictionary] = [dic as! JSONDictionary]
+            
+            return array
+        } else {    // formato de json incorrecto
+            
+            throw HackerBooksErrors.wrongJSONFormat
+        }
         
-        return array
-    } else {
-        throw HackerBooksErrors.jsonParsingError
+    } else {    // formato de json incorrecto
+        throw HackerBooksErrors.wrongJSONFormat
     }
 }
-
 
 // MARK: Decoding
 

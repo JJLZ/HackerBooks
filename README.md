@@ -4,7 +4,42 @@ Esta es la aplicación de práctica desarrollada para el curso de Fundamentos iO
 
 ### Respuestas a preguntas:
 
-##### *JSONSerialization* devuelve un parámetro *Any* que puede contener tanto un *Array* de *Dictionary* como un *Dictionary*. Mira en la ayuda el método *type(of:)* y como usarlo para saber qué the han devuelto exactamente. ¿En qué otros modos podemos trabajar? ¿is, as?
+##### *JSONSerialization* devuelve un parámetro *Any* que puede contener tanto un *Array* de *Dictionary* como un *Dictionary*. Mira en la ayuda el método *type(of:)* y como usarlo para saber qué te han devuelto exactamente. ¿En qué otros modos podemos trabajar? ¿is, as?
+
+En este caso utilice la siguiente aproximación:
+
+~~~~
+typealias JSONObject        = AnyObject
+typealias JSONDictionary    = [String : JSONObject]
+typealias JSONArray         = [JSONDictionary]
+
+func loadJsonFileFrom(localUrl: URL) throws -> JSONArray {
+    
+    if let data = try? Data(contentsOf: localUrl),
+        let maybeArray: Any = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) {
+        
+        if let array = (maybeArray as? NSArray) as Array? { // Es un array de diccionarios
+            
+            return (array as? JSONArray)!
+            
+        } else if let dic = (maybeArray as? NSDictionary) as Dictionary? { // Es un diccionario
+            
+            // metemos el diccionario dentro de un array antes de regresarlo
+            let array: [JSONDictionary] = [dic as! JSONDictionary]
+            
+            return array
+        } else {    // formato de json incorrecto
+            
+            throw HackerBooksErrors.wrongJSONFormat
+        }
+        
+    } else {    // formato de json incorrecto
+        throw HackerBooksErrors.wrongJSONFormat
+    }
+}
+~~~~
+
+Compruebo si lo que me regreso JSONSelialization es un array de diccionarios, si no lo es, compruebo si es un diccionario solitario; si lo es, lo meto dentro de un array como único elemento para poder regresar el tipo correcto en mi función. Si las dos cosas fallan, dor por hecho que estoy leyendo un archivo JSON con formato incorrecto. Hice la prueba enviandole un diccionario solicitado a esta función y todo OK.
 
 ##### Descarga el *JSON* y guárdalo en la carpeta *Documents* de tu *sandbox*. Haz lo mismo para las imágenes de portada y los pdf's. ¿Dónde guardarías estos datos?
 
