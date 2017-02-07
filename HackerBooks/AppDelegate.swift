@@ -25,17 +25,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var jsonFileUrl = FileManager.default.urls(for: .documentDirectory, in:.userDomainMask).first!
         jsonFileUrl.appendPathComponent("books.json")
         
-        var bookArray = [Book]()
-        
         // Verificamos UserDefaults para ver si el archivo ya ha sido descargado
         let isLocal = defaults.bool(forKey: "jsonDocumentIsAlreadyDownloaded")
         
         if isLocal { // Si el archivo json ya ha sido descargado
             
-            // Hacemos el parsing del json y cargamos nuestro modelo
-            bookArray = loadDataFromJsonFile(localUrl: jsonFileUrl)
+            prepareViewControllers(localUrl: jsonFileUrl)
             
         } else { // El json no esta en local
+            
+            //--newcode test --
+//            let temporalVC = TemporalViewController(nibName: "TemporalViewController", bundle: Bundle.main)
+//            
+//            window = UIWindow(frame: UIScreen.main.bounds)
+//            window?.rootViewController = temporalVC
+//            window?.makeKeyAndVisible()
+            //--
             
             // Lo descargamos desde https://t.co/K9ziV0z3SJ y lo guradamos en en la carpeta Documents
             if let url = URL(string: "https://t.co/K9ziV0z3SJ") {
@@ -46,17 +51,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     defaults.set(true, forKey: "jsonDocumentIsAlreadyDownloaded")
                     defaults.synchronize()
                     
-                    // Hacemos el parsing del json y cargamos nuestro modelo
-                    bookArray = self.loadDataFromJsonFile(localUrl: jsonFileUrl)
-                    
-                    //-- Crear library y enviarla como notificación --
-                    let library = Library(books: bookArray)
-                    self.sendLibraryFull(library: library)
-                    //--
+                    self.prepareViewControllers(localUrl: jsonFileUrl)
                 })
             }
         }
         
+        return true
+    }
+    
+    // Prepare ViewControllers
+    func prepareViewControllers(localUrl: URL) {
+        
+        // Hacemos el parsing del json y cargamos nuestro modelo
+        let bookArray : [Book] = loadDataFromJsonFile(localUrl: localUrl)
+    
         // Crear nuestro modelo Library
         let library = Library(books: bookArray)
         
@@ -87,10 +95,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = leftNavC
         }
         window?.makeKeyAndVisible()
-        
-        return true
     }
-    
+
     func loadDataFromJsonFile(localUrl: URL) -> [Book] {
         
         do {
