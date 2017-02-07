@@ -76,7 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             libraryVC.delegate = bookVC
             
             // Creamos el splitVC
-//            let splitVC = UISplitViewController()
             splitVC.viewControllers = [leftNavC, rigthNavC]
         }
         //--
