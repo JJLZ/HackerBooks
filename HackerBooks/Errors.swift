@@ -14,4 +14,5 @@ enum HackerBooksErrors: Error {
     case wrongURLFormatForJSONResource
     case resourcePointedByURLNotReachable
     case wrongJSONFormat
+    case errorSavingJSON
 }

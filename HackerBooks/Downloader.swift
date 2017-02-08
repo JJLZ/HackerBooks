@@ -31,11 +31,11 @@ class Downloader {
                     try FileManager.default.copyItem(at: tempLocalUrl, to: localUrl)
                     completion()
                 } catch (let writeError) {
-                    print("error writing file \(localUrl) : \(writeError)")
+//                    print("error writing file \(localUrl) : \(writeError)")
                 }
                 
             } else {
-                print("Failure: %@", error?.localizedDescription ?? "error desconocido");
+//                print("Failure: %@", error?.localizedDescription ?? "error desconocido");
             }
         }
         task.resume()
