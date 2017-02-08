@@ -19,7 +19,6 @@
 		8826542B1E3CB699005E8D22 /* Library.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826542A1E3CB699005E8D22 /* Library.swift */; };
 		882654301E3CFFB9005E8D22 /* JSONProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */; };
 		882654321E3D008F005E8D22 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882654311E3D008F005E8D22 /* Errors.swift */; };
-		88663C071E4A5EAE0018785F /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88663C061E4A5EAE0018785F /* Media.xcassets */; };
 		886742931E47B34900EAEDF7 /* PDFViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886742911E47B34900EAEDF7 /* PDFViewerViewController.swift */; };
 		886742941E47B34900EAEDF7 /* PDFViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886742921E47B34900EAEDF7 /* PDFViewerViewController.xib */; };
 		886742961E47BDF200EAEDF7 /* libro.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 886742951E47BDF200EAEDF7 /* libro.pdf */; };
@@ -29,10 +28,9 @@
 		88864A1F1E43C1D9003AC5EC /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88864A1E1E43C1D9003AC5EC /* Tags.swift */; };
 		88864A211E43C986003AC5EC /* Authors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88864A201E43C986003AC5EC /* Authors.swift */; };
 		88C944081E4500B5002CAF47 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88C944071E4500B5002CAF47 /* Downloader.swift */; };
+		88D774791E4BA7C2002CC160 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D774781E4BA7C2002CC160 /* Media.xcassets */; };
 		88D8F15E1E42BEFE009D0EB8 /* MultiDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D8F15D1E42BEFE009D0EB8 /* MultiDictionary.swift */; };
 		88D8F1601E42BF1E009D0EB8 /* AsyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D8F15F1E42BF1E009D0EB8 /* AsyncData.swift */; };
-		88F9ACD91E4A7ED20052E218 /* TemporalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88F9ACD71E4A7ED20052E218 /* TemporalViewController.swift */; };
-		88F9ACDA1E4A7ED20052E218 /* TemporalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F9ACD81E4A7ED20052E218 /* TemporalViewController.xib */; };
 		88F9ACDC1E4A81350052E218 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88F9ACDB1E4A81350052E218 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -51,7 +49,6 @@
 		8826542A1E3CB699005E8D22 /* Library.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Library.swift; sourceTree = "<group>"; };
 		8826542F1E3CFFB9005E8D22 /* JSONProcessing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONProcessing.swift; sourceTree = "<group>"; };
 		882654311E3D008F005E8D22 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		88663C061E4A5EAE0018785F /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		886742911E47B34900EAEDF7 /* PDFViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFViewerViewController.swift; sourceTree = "<group>"; };
 		886742921E47B34900EAEDF7 /* PDFViewerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PDFViewerViewController.xib; sourceTree = "<group>"; };
 		886742951E47BDF200EAEDF7 /* libro.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = libro.pdf; sourceTree = "<group>"; };
@@ -61,10 +58,9 @@
 		88864A1E1E43C1D9003AC5EC /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		88864A201E43C986003AC5EC /* Authors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authors.swift; sourceTree = "<group>"; };
 		88C944071E4500B5002CAF47 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		88D774781E4BA7C2002CC160 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		88D8F15D1E42BEFE009D0EB8 /* MultiDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiDictionary.swift; sourceTree = "<group>"; };
 		88D8F15F1E42BF1E009D0EB8 /* AsyncData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncData.swift; sourceTree = "<group>"; };
-		88F9ACD71E4A7ED20052E218 /* TemporalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporalViewController.swift; sourceTree = "<group>"; };
-		88F9ACD81E4A7ED20052E218 /* TemporalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TemporalViewController.xib; sourceTree = "<group>"; };
 		88F9ACDB1E4A81350052E218 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -136,8 +132,6 @@
 			children = (
 				88228FE31E41490C00450F39 /* Main.storyboard */,
 				882654131E3CB3A4005E8D22 /* AppDelegate.swift */,
-				88F9ACD71E4A7ED20052E218 /* TemporalViewController.swift */,
-				88F9ACD81E4A7ED20052E218 /* TemporalViewController.xib */,
 				88228FE91E414B9C00450F39 /* LibraryViewController.swift */,
 				88228FEA1E414B9C00450F39 /* LibraryViewController.xib */,
 				880519C11E4697EF000E43E1 /* CustomTableViewCell.swift */,
@@ -156,8 +150,8 @@
 				886742951E47BDF200EAEDF7 /* libro.pdf */,
 				888609B11E46CE3300F68013 /* libro.png */,
 				8826541F1E3CB3A4005E8D22 /* Info.plist */,
+				88D774781E4BA7C2002CC160 /* Media.xcassets */,
 				8826541A1E3CB3A4005E8D22 /* Assets.xcassets */,
-				88663C061E4A5EAE0018785F /* Media.xcassets */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -223,15 +217,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88663C071E4A5EAE0018785F /* Media.xcassets in Resources */,
 				88228FEC1E414B9C00450F39 /* LibraryViewController.xib in Resources */,
 				880519C41E4697EF000E43E1 /* CustomTableViewCell.xib in Resources */,
 				886742961E47BDF200EAEDF7 /* libro.pdf in Resources */,
 				888609B61E46DA9D00F68013 /* BookViewController.xib in Resources */,
 				888609B21E46CE3300F68013 /* libro.png in Resources */,
+				88D774791E4BA7C2002CC160 /* Media.xcassets in Resources */,
 				88228FE41E41490C00450F39 /* Main.storyboard in Resources */,
 				8826541B1E3CB3A4005E8D22 /* Assets.xcassets in Resources */,
-				88F9ACDA1E4A7ED20052E218 /* TemporalViewController.xib in Resources */,
 				88F9ACDC1E4A81350052E218 /* LaunchScreen.storyboard in Resources */,
 				886742941E47B34900EAEDF7 /* PDFViewerViewController.xib in Resources */,
 			);
@@ -254,7 +247,6 @@
 				882654301E3CFFB9005E8D22 /* JSONProcessing.swift in Sources */,
 				88D8F15E1E42BEFE009D0EB8 /* MultiDictionary.swift in Sources */,
 				88C944081E4500B5002CAF47 /* Downloader.swift in Sources */,
-				88F9ACD91E4A7ED20052E218 /* TemporalViewController.swift in Sources */,
 				880519C31E4697EF000E43E1 /* CustomTableViewCell.swift in Sources */,
 				88864A1F1E43C1D9003AC5EC /* Tags.swift in Sources */,
 				886742931E47B34900EAEDF7 /* PDFViewerViewController.swift in Sources */,
