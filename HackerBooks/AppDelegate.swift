@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let defaults = UserDefaults.standard
         
         // Ruta completa para books.json dentro de nuestra carpeta Documents
-        var jsonFileUrl = applicationDocumentsDirectory()
+        var jsonFileUrl = Utils.applicationDocumentsDirectory()
         jsonFileUrl.appendPathComponent("books.json")
         
         // Verificamos UserDefaults para ver si el archivo ya ha sido descargado
@@ -34,88 +35,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } else { // El json no esta en local
             
-            //--newcode xcc --
-            loadAndSaveJson(url: URL(string: "https://t.co/K9ziV0z3SJ")!) { (success) -> Void in
+            // Lo descargamos desde https://t.co/K9ziV0z3SJ y lo guradamos en en la carpeta Documents
+            if let url = URL(string: "https://t.co/K9ziV0z3SJ") {
                 
-                if success {
+                Utils.load(url: url, to: jsonFileUrl, completion: {
                     
                     // Actualizamos bandera en UserDefaults para no volverlo a descargar
                     defaults.set(true, forKey: "jsonDocumentIsAlreadyDownloaded")
                     defaults.synchronize()
                     
+                    // Finalizamos cargando nuestro controladores,
+                    // haciendolo en el queue main para no trabar interfaz más de lo necesario
                     DispatchQueue.main.async {
                         self.prepareViewControllers(localUrl: jsonFileUrl)
                     }
-                }
+                })
             }
-            //--
-            
-//            // Lo descargamos desde https://t.co/K9ziV0z3SJ y lo guradamos en en la carpeta Documents
-//            if let url = URL(string: "https://t.co/K9ziV0z3SJ") {
-//                
-//                Downloader.load(url: url, to: jsonFileUrl, completion: {
-//                    
-//                    // Actualizamos bandera en UserDefaults para no volverlo a descargar
-//                    defaults.set(true, forKey: "jsonDocumentIsAlreadyDownloaded")
-//                    defaults.synchronize()
-//                    
-//                    self.prepareViewControllers(localUrl: jsonFileUrl)
-//                })
-//            }
         }
         
         return true
     }
-    
-    //--newcode back --//
-    func applicationDocumentsDirectory() -> URL {
         
-        let pathDocumentDirectory: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        return pathDocumentDirectory
-    }
-
-    //--newcode back --//
-    func loadAndSaveJson(url: URL, completion: @escaping (_ success: Bool) -> Void) {
-        
-        let task = URLSession.shared.dataTask(with: url as URL) {(data, response, error) -> Void in
-            
-            if error == nil {
-                
-                if let data = data {
-                    
-                    let jsonString = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-                    
-                    var urlFile: URL = self.applicationDocumentsDirectory()
-                    urlFile.appendPathComponent("books.json")
-                    
-                    do {
-                        try jsonString?.write(to: urlFile, atomically: true, encoding: String.Encoding.utf8.rawValue)
-                    }
-                    catch {
-                        fatalError("Error while saving JSON file")
-                    }
-                    
-                    completion(true)
-                                        
-                } else {
-                    
-                    fatalError("Error while loading JSON file")
-                }
-                
-            } else {
-                
-                print("Check your Internet connection and try again, please.")
-                fatalError("Error while loading JSON file")
-            }
-        }
-        
-        task.resume()
-    }
-    
     // Prepare ViewControllers
     func prepareViewControllers(localUrl: URL) {
-        
-        print("entro a prepareViewControllers")
         
         // Hacemos el parsing del json y cargamos nuestro modelo
         let bookArray : [Book] = loadDataFromJsonFile(localUrl: localUrl)

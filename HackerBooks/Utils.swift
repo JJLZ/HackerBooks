@@ -1,16 +1,20 @@
 //
-//  Downloader.swift
+//  Utils.swift
 //  HackerBooks
 //
-//  Created by JJLZ on 2/3/17.
+//  Created by JJLZ on 2/9/17.
 //  Copyright © 2017 ESoft. All rights reserved.
 //
 
 import Foundation
 
-// http://stackoverflow.com/questions/28219848/download-file-in-swift
-
-class Downloader {
+class Utils {
+    
+    class func applicationDocumentsDirectory() -> URL {
+        
+        let pathDocumentDirectory: URL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        return pathDocumentDirectory
+    }
     
     class func load(url: URL, to localUrl: URL, completion: @escaping () -> ()) {
         
@@ -24,24 +28,24 @@ class Downloader {
                 
                 // Success
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode {
-                    print("Success: \(statusCode)")
+                    print("Downloader load Success: \(statusCode)")
                 }
                 
                 do {
                     try FileManager.default.copyItem(at: tempLocalUrl, to: localUrl)
                     completion()
                 } catch (let writeError) {
-//                    print("error writing file \(localUrl) : \(writeError)")
+                    print("Error writing file \(localUrl) : \(writeError)")
                 }
                 
             } else {
-//                print("Failure: %@", error?.localizedDescription ?? "error desconocido");
+                print("Failure: %@", error?.localizedDescription ?? "error desconocido");
+                fatalError("Error while loading file")
             }
         }
         task.resume()
     }
 }
-
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 
