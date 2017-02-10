@@ -52,12 +52,6 @@ class Library {
         loadDepot(tags: self.tags, books: self.books)
     }
     
-    deinit {
-    
-        // Limipamos la casa
-        unsubscribeOfNotifications()
-    }
-    
     // Cargamos el multidictionary
     func loadDepot(tags: [Tag], books: [Book]) {
         
@@ -73,9 +67,6 @@ class Library {
                 }
             }
         }
-        
-        // Nos suscribimos a Notifications para detectar camibos en Favorites
-        subscribeToNotifications()
     }
             
     // Cantidad de libros que hay un una temática.
@@ -111,75 +102,17 @@ class Library {
         
         return allBooks?[at] ?? nil
     }
-}
-
-// MARK: Notification
-
-extension Library {
     
-    func subscribeToNotifications() {
+    func remove(book: Book, forTag tag: Tag) {
         
-        let nc = NotificationCenter.default
-        
-        nc.addObserver(forName: BookViewController.notificationName, object: nil, queue: OperationQueue.main) { (note: Notification) in
-            
-            // extraigo el libro de la notificacion
-            let userInfo = note.userInfo
-            let book: Book = userInfo?[BookViewController.BookKey] as! Book
-            
-            //-- Guardar en Userdefaults el nuevo estado para "favorite" --
-            // Nota: tomamos el hashValue del title como identificador único
-            let defaults = UserDefaults.standard
-            defaults.set(book.isFavorite, forKey: String(book.title.hashValue))
-            defaults.synchronize()
-            //--
-            
-            //-- Actualizar los tags del Book y el almacen para el tag "favorite" --
-            let favoriteTag: Tag = Tag(name: "favorite")
-            
-            if book.isFavorite {
-                
-                // agregar tag "favorite" al libro
-                book.tags.append(favoriteTag)
-                
-                // agregar libro al los favoritos en el almacen
-                self.almacen.insert(value: book, forKey: favoriteTag)
-            } else {
-                
-                // eliminar tag "favorite" al libro
-                book.tags = book.tags.filter{$0 != favoriteTag}
-                
-                // remover libro del Favoritos en el almacen
-                self.almacen.remove(value: book, fromKey: favoriteTag)
-            }
-            //--
-        }
+        self.almacen.remove(value: book, fromKey: tag)
     }
     
-    func unsubscribeOfNotifications() {
+    func insert(book: Book, forTag tag: Tag) {
         
-        let nc = NotificationCenter.default
-        nc.removeObserver(self)
+        self.almacen.insert(value: book, forKey: tag)
     }
 }
-
-//let tagCont: Int = self.bookCount(forTagName: "algorithms")
-//print("\(tagCont)")
-//
-//let tabBooks: [Book]? = self.books(forTagName: "algorithms")
-//print("\(tabBooks)")
-//
-//let elemento1: Book? = self.book(forTagName: "algorithms", at: 1)
-//print("\(elemento1)")
-//
-//print("keys.count \(almacen.keys.count)")
-//print("countUnique \(almacen.countUnique)")
-//print("countBuckets \(almacen.countBuckets)")
-//print("count \(almacen.count)")
-
-
-//[<Tag: Favorite>, <Tag: access controls>, <Tag: algorithms>, <Tag: android>, <Tag: artificial intelligence>, <Tag: c>, <Tag: coffeescript>, <Tag: community management>, <Tag: compilers>, <Tag: control theory>, <Tag: cryptography>, <Tag: cs>, <Tag: data mining>, <Tag: data structures>, <Tag: data visualization>, <Tag: databases>, <Tag: design>, <Tag: distributed systems>, <Tag: distributed version control system>, <Tag: dvcs>, <Tag: foss>, <Tag: functional>, <Tag: game theory>, <Tag: git>, <Tag: go>, <Tag: golang>, <Tag: graphics>, <Tag: gtd>, <Tag: haskell>, <Tag: html5>, <Tag: information theory>, <Tag: java>, <Tag: javascript>, <Tag: js>, <Tag: learning algorithms>, <Tag: linear algebra>, <Tag: machine learning>, <Tag: math>, <Tag: matrix computations>, <Tag: mercurial>, <Tag: mongodb>, <Tag: nosql>, <Tag: open source>, <Tag: open source processes>, <Tag: optimization>, <Tag: parsing>, <Tag: php>, <Tag: planning>, <Tag: practical>, <Tag: programing>, <Tag: programming>, <Tag: python>, <Tag: robotics>, <Tag: security>, <Tag: statistics>, <Tag: subversion>, <Tag: text processing>, <Tag: tutorials>, <Tag: veracity>, <Tag: version control>, <Tag: vim>, <Tag: web development>, <Tag: web-design>]
-
 
 //"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 

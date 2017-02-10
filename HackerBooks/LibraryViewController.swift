@@ -29,7 +29,7 @@ class LibraryViewController: UITableViewController {
     }
     
     deinit {
-    
+        
         // limpiar la casa
         unsubscribeOfNotifications()
     }
@@ -64,9 +64,9 @@ class LibraryViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         return model.tags.count
@@ -92,12 +92,12 @@ class LibraryViewController: UITableViewController {
         var headerHeight: CGFloat
         
         switch section {
-    
+            
         case 0: // sección "Favorite"
-    
+            
             // "Esconder" el header cuando no tengamos favoritos
             if model.bookCount(forTagName: "favorite") == 0 {
-            
+                
                 headerHeight = 0.0
             } else {
                 
@@ -107,7 +107,7 @@ class LibraryViewController: UITableViewController {
         default:
             headerHeight = defaultHeight
         }
-
+        
         return headerHeight
     }
     
@@ -115,7 +115,7 @@ class LibraryViewController: UITableViewController {
         
         return 97.0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdetifier, for: indexPath) as! CustomTableViewCell
@@ -134,7 +134,7 @@ class LibraryViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         // Obtener el libro correspondiente al sell seleccionado
         let tag: Tag = model.tags[indexPath.section]
         let book: Book = model.book(forTagName: tag.name, at: indexPath.row)!
@@ -145,7 +145,7 @@ class LibraryViewController: UITableViewController {
             let bookVC = BookViewController(model: book)
             self.navigationController?.pushViewController(bookVC, animated: true)
         } else { // para ipad
-        
+            
             // avisamos al delegado
             delegate?.libraryViewController(self, didSelectBook: book)
             
@@ -164,6 +164,40 @@ extension LibraryViewController {
         let nc = NotificationCenter.default
         
         nc.addObserver(forName: BookViewController.notificationName, object: nil, queue: OperationQueue.main) { (note: Notification) in
+            
+            // extraigo el libro de la notificacion
+            let userInfo = note.userInfo
+            let book: Book = userInfo?[BookViewController.BookKey] as! Book
+            
+            //-- Guardar en Userdefaults el nuevo estado para "favorite" --
+            // Nota: tomamos el hashValue del title como identificador único
+            let defaults = UserDefaults.standard
+            defaults.set(book.isFavorite, forKey: String(book.title.hashValue))
+            defaults.synchronize()
+            //--
+            
+            //-- Actualizar los tags del Book y el almacen para el tag "favorite" --
+            let favoriteTag: Tag = Tag(name: "favorite")
+            
+            if book.isFavorite {
+                
+                // agregar tag "favorite" al libro
+                book.tags.append(favoriteTag)
+                
+                // agregar libro al los favoritos en el almacen
+                self.model.insert(book: book, forTag: favoriteTag)
+            } else {
+                
+                // eliminar tag "favorite" al libro
+                book.tags = book.tags.filter{$0 != favoriteTag}
+                
+                // remover libro del Favoritos en el almacen
+                self.model.remove(book: book, forTag: favoriteTag)
+            }
+            
+//            self.tableView.beginUpdates()
+//            self.tableView.reloadSections([0], with: .fade)
+//            self.tableView.endUpdates()
             
             self.tableView.reloadData()
         }
@@ -186,7 +220,7 @@ extension LibraryViewController {
             
             let userInfo = note.userInfo
             let library: Library = userInfo?[AppDelegate.LoadKey] as! Library
-
+            
             // Cargar la libreria completa y cargar tabla
             self.model = library
             self.tableView.reloadData()
