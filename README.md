@@ -55,8 +55,6 @@ En este caso escogí hacer una notificación para notificar el cambio de esta pr
 ##### Para que la tabla se actulice, usa el método **reloadData** de *UITableView*. Esto hace que la tabla vuelva a pedir datos a su dataSource. ¿Es esto una aberración desde el punto de vista del rendimiento? ¿Hay una forma alternativa? ¿Cuándo crees que vale la pena usarlo?
 Cuando existen varios elementos en la tabla divididas en grupos (secciones), como es nuestro caso, el recargar toda la tabla no es lo más eficiente, ya que consume tiempo, recursos y puede bloquear un poco la interfaz. En este caso se debe recargar solo la sección que sabemos ha sufrido cambios (Favorite). Para esto se puede utilizar el método: *reloadSections(_:withRowAnimation:)* del *UITableView*.
 
-Nota: En este momento estoy utilizando *reloadData* en mi aplicación porque tengo problemas aún con los Dispatch Queue y aún no logro atinar sobre el uso correcto para poder habilitar el refresh con *reloadSections(_:withRowAnimation:)*.
-
 ##### Cuando el usuario cambia en la tabla el libro seleccionado, el PDFViewController debe actualizarse. ¿Cómo lo harías?
 Se puede hacer mediante delegados o notificaciones. En este caso opte por la notificación porque es más fácil de implementar ya que hace lo que necesitamos con menos código.
 

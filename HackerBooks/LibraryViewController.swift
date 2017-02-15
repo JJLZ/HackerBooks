@@ -165,41 +165,47 @@ extension LibraryViewController {
         
         nc.addObserver(forName: BookViewController.notificationName, object: nil, queue: OperationQueue.main) { (note: Notification) in
             
-            // extraigo el libro de la notificacion
-            let userInfo = note.userInfo
-            let book: Book = userInfo?[BookViewController.BookKey] as! Book
+            let serialQueue = DispatchQueue(label: "com.emprendesoft.HackerBooks.FavoritesUpdateQueue")
             
-            //-- Guardar en Userdefaults el nuevo estado para "favorite" --
-            // Nota: tomamos el hashValue del title como identificador único
-            let defaults = UserDefaults.standard
-            defaults.set(book.isFavorite, forKey: String(book.title.hashValue))
-            defaults.synchronize()
-            //--
-            
-            //-- Actualizar los tags del Book y el almacen para el tag "favorite" --
-            let favoriteTag: Tag = Tag(name: "favorite")
-            
-            if book.isFavorite {
+            serialQueue.async {
                 
-                // agregar tag "favorite" al libro
-                book.tags.append(favoriteTag)
+                // extraigo el libro de la notificacion
+                let userInfo = note.userInfo
+                let book: Book = userInfo?[BookViewController.BookKey] as! Book
                 
-                // agregar libro al los favoritos en el almacen
-                self.model.insert(book: book, forTag: favoriteTag)
-            } else {
+                //-- Guardar en Userdefaults el nuevo estado para "favorite" --
+                // Nota: tomamos el hashValue del title como identificador único
+                let defaults = UserDefaults.standard
+                defaults.set(book.isFavorite, forKey: String(book.title.hashValue))
+                defaults.synchronize()
+                //--
                 
-                // eliminar tag "favorite" al libro
-                book.tags = book.tags.filter{$0 != favoriteTag}
+                //-- Actualizar los tags del Book y el almacen para el tag "favorite" --
+                let favoriteTag: Tag = Tag(name: "favorite")
                 
-                // remover libro del Favoritos en el almacen
-                self.model.remove(book: book, forTag: favoriteTag)
+                if book.isFavorite {
+                    
+                    // agregar tag "favorite" al libro
+                    book.tags.append(favoriteTag)
+                    
+                    // agregar libro al los favoritos en el almacen
+                    self.model.insert(book: book, forTag: favoriteTag)
+                } else {
+                    
+                    // eliminar tag "favorite" al libro
+                    book.tags = book.tags.filter{$0 != favoriteTag}
+                    
+                    // remover libro del Favoritos en el almacen
+                    self.model.remove(book: book, forTag: favoriteTag)
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    self.tableView.beginUpdates()
+                    self.tableView.reloadSections([0], with: .bottom)
+                    self.tableView.endUpdates()
+                }
             }
-            
-//            self.tableView.beginUpdates()
-//            self.tableView.reloadSections([0], with: .fade)
-//            self.tableView.endUpdates()
-            
-            self.tableView.reloadData()
         }
     }
     
